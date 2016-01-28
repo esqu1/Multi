@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.7.6)  28 JAN 2016 17:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.7.6)  28 JAN 2016 18:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1306,7 +1306,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[5] <box.png, id=95, 2007.5pt x 1542.76375pt>
+[5] <box.png, id=119, 2007.5pt x 1542.76375pt>
 File: box.png Graphic file (type png)
  <use box.png>
 Package pdftex.def Info: box.png used on input line 204.
@@ -1319,6 +1319,10 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [6 <./box.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 270--272
+
+ []
+
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
@@ -1326,20 +1330,42 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 246.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 246.
+Underfull \hbox (badness 10000) in paragraph at lines 302--305
+
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 331--333
+
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[9]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 345.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 345.
  (./MultiNotes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 246.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 246.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 345.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 345.
 Package rerunfilecheck Info: File `MultiNotes.out' has not changed.
-(rerunfilecheck)             Checksum: BD9A0703D0402B2CF849B1839A3A3A37;857.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 246.
+(rerunfilecheck)             Checksum: 94EFFB92882AC09E7621DBEC130C2DC3;1235.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 345.
  ) 
 Here is how much of TeX's memory you used:
- 29595 strings out of 493308
- 664588 string characters out of 6140093
- 802663 words of memory out of 5000000
- 32515 multiletter control sequences out of 15000+600000
+ 29620 strings out of 493308
+ 664893 string characters out of 6140093
+ 802682 words of memory out of 5000000
+ 32525 multiletter control sequences out of 15000+600000
  18192 words of font info for 69 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  69i,19n,81p,745b,1986s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1359,9 +1385,9 @@ texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive
 -dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/typ
 e1/public/cm-super/sfrm1200.pfb>
-Output written on MultiNotes.pdf (7 pages, 257144 bytes).
+Output written on MultiNotes.pdf (9 pages, 277581 bytes).
 PDF statistics:
- 173 PDF objects out of 1000 (max. 8388607)
- 26 named destinations out of 1000 (max. 500000)
- 122 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 218 PDF objects out of 1000 (max. 8388607)
+ 41 named destinations out of 1000 (max. 500000)
+ 170 words of extra memory for PDF output out of 10000 (max. 10000000)
 

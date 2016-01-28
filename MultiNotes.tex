@@ -243,4 +243,103 @@ Let $P_0(x_0,y_0,z_0)$ be a given point on a plane, and $P(x,y,z)$ an arbitrary 
 
 This is the \textbf{point-normal form} of the equation of the line. We could also move the constant terms to one side to obtain $ax+by+cz = d$, the \textbf{standard form} of the equation.
 
+\section{Vector-Valued Functions}
+\subsection{Definitions}
+A vector valued function $\vec{r}(t)$ is a function that takes in a scalar and returns a vector. We denote the function as such:
+\[
+\begin{aligned}
+\vec{r}(t) &= f(t)\ihat + g(t)\jhat + h(t)\khat \\
+&= \la f(t), g(t), h(t) \ra
+\end{aligned}
+\]
+where $f(t), g(t), h(t)$ are scalar-valued functions. We can assess the domain of $\vec{r}(t)$ by looking at the domain of the individual scalar valued functions. We can also define a limit\footnote{This limit is both additive and multiplicative with dot/cross products.} as follows:
+\[ \lim_{t\rightarrow a}{\vec{r}(t)} = \left\la \lim_{t\rightarrow a}{f(t)}, \lim_{t\rightarrow a}{g(t)}, \lim_{t\rightarrow a}{h(t)} \right\ra \]
+\subsection{Continuity}
+$\vec{r}(t)$ is continuous at $t=a$ IFF:
+\begin{enumerate}
+\item $\displaystyle\lim_{t\rightarrow a}{\vec{r}(t)}$ exists
+\item $\vec{r}(a)$ exists
+\item $\displaystyle\lim_{t\rightarrow a}{\vec{r}(t)} = \vec{r}(a)$
+\end{enumerate}
+
+\subsection{Derivatives}
+We can also define the derivative of a vector-valued function as $\pvec{r}'(t)$. The proof for finding the derivative of a vector-valued function is analagous to that of a scalar-valued function, just repeated multiple times, so it will be omitted here.
+\[ \pvec{r}'(t) = f'(t)\ihat + g'(t)\jhat + h'(t)\khat \]
+
+\subsection{Unit Tangent/Normal Vectors}
+We define a \textbf{smooth} curve/function as one that is continuous everywhere and where $\pvec{r}'(t) \neq 0$. \\ \\
+Here, we need two special vectors associated with tangent vectors. We can define the \textbf{unit tangent vector} as follows:
+\[ \vec{T}(t) = \frac{\pvec{r}'(t)}{\norm{\pvec{r}'(t)}}\]
+
+Now, suppose that $\vec{r}(t)$ is twice differentiable. Since $\vec{T}(t)$ is a unit vector,
+\[
+\begin{aligned}
+\vec{T}(t) \cdot \vec{T}(t) &= 1 \\
+\frac{d}{dt}(\vec{T}(t) \cdot \vec{T}(t)) &= \frac{d}{dt}(1) \\
+2{[}\pvec{T}'(t) \cdot \vec{T}(t) {]} &= 0 \\
+\pvec{T}'(t) \cdot \vec{T}(t) &= 0 \\
+\end{aligned}
+\]
+which means $\pvec{T}'(t)$ is orthogonal to $\vec{T}(t)$. We can define a unit vector in the direction of $\pvec{T}'(t)$, known as the \textbf{unit normal vector}:
+\[ \vec{N}(t) = \frac{\pvec{T}'(t)}{\norm{\pvec{T}'(t)}} \]
+
+\subsection{Arc Length}
+The arc length along a curve $\vec{r}(t)$ from starting point $t=a$ is:
+\[ s(t) = \int_a^t{\norm{\pvec{r}'(t)} \ dt} \]
+
+We can parameterize a curve with arc length, meaning the input will be the length traveled along a curve and the function will return the position. 
+
+To do so, we first find the arc length function in terms of $t$. Then, we get $t$ in terms of the arc length, and substitute this expression into the curve's function. 
+
+We prove two results of this:
+
+\begin{theorem}
+This technique does yield an arc length parameterization.
+\end{theorem}
+
+\begin{proof}
+Let $\vec{r}(t)$ be a parameterization of the curve.
+\[ s(t) = \int_a^t\norm{\pvec{r}'(u)} \ du \rightarrow s'(t) = \norm{\pvec{r}'(t)} > 0 \]
+which means $s(t)$ willl always have an inverse. Call this inverse $\varphi(s) = t$. \\ \\
+Let $\vec{r_1}(s) = \vec{r}(\varphi(s))$; this is our new parameterization. We wish to show that $\norm{\pvec{r_1}'(s)} = 1$.\footnote{If this is the case, then the formula for arc length yields the proper arc length.} 
+
+\[
+\begin{aligned}
+\norm{\pvec{r_1}'(s)} &= \norm{\frac{d}{ds}{[}\vec{r}(\phi(s)){]}} \\
+&= \norm{\varphi'(s)\pvec{r}'(\varphi(s))} \\
+&= \norm{\varphi'(s)}\norm{\pvec{r}'(\varphi(s))}
+\end{aligned}
+\]
+Do note that $\pvec{r}'(\phi(s))$ is $\pvec{r}'(t)$ EVALUATED at $t = \varphi(s)$. Then,
+\[
+\begin{aligned}
+\varphi'(s) = \frac{dt}{ds} &= \frac{1}{\frac{ds}{dt}} \\
+&= \frac{1}{s'(t)} \\
+&= \frac{1}{s'(\varphi(s))} \\
+&= \frac{1}{\norm{\pvec{r}'(\varphi(s))}}
+\end{aligned}
+\]
+Substituting:
+\[ \norm{\pvec{r_1}'(s)} = \norm{\varphi'(s)}\norm{\pvec{r}'(\varphi(s))} = \frac{1}{\norm{\pvec{r}'(\varphi(s))}} \norm{\pvec{r}'(\varphi(s))} = 1 \]
+\end{proof}
+
+\begin{theorem}
+The arc length is invariant under different parameterizations.
+\end{theorem}
+
+\begin{proof}
+Let $\vec{r}(t)$ and $\vec{R}(u)$ be two different parameterizations of the same curve. We will run the arc length along $a \le t \le b$ and $c \le u \le d$, so we relate the two paramters $t$ and $u$ with the equation $t = \phi(u)$. Note that $\vec{r}(\phi(u) = R(u)$. \\ \\
+We need to show that $\int_a^b\norm{\pvec{r}'(t)} \ dt = \int_c^d\norm{\pvec{R}'(u)} \ du$.
+
+Noting that $dt = \phi'(u) \ du$, we do u-substitution:
+\[
+\begin{aligned}
+\int_a^b\norm{\pvec{r}'(t)} \ dt &= \int_c^d\norm{\pvec{r}'(\phi(u))} \phi'(u) \ du \\
+&= \int_c^d\norm{\phi'(u)\pvec{r}'(\phi(u))} \ du \\
+&= \int_c^d\norm{\frac{d}{du}\vec{r}(\phi(u))} \ du \\
+&= \int_c^d\norm{\pvec{R}'(u)} \ du \\
+\end{aligned}
+\]
+\end{proof}
+
 \end{document}
