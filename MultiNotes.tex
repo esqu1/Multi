@@ -2,6 +2,7 @@
 \usepackage{esqu1}
 \pagestyle{fancy}
 
+\lhead{Brandon Lin}
 \chead{Multivariate Calculus}
 \rhead{Fall 2015}
 
@@ -50,6 +51,7 @@ If $\vec{u} = \la u_1, u_2, \dots, u_n \ra$ and $\vec{v} = \la v_1, v_2, \dots, 
                \draw[red,thick,->] (axis cs:0,0) -- (axis cs:0.5,0.2) node[midway,below]{$\vec{v}$};
                \draw[blue,thick,->] (axis cs:0,0) -- (axis cs:0.2,0.6) node[midway,left]{$\vec{u}$}; 
                \draw[black,thick,->] (axis cs:0.5,0.2) -- (axis cs:0.2,0.6) node[midway,right]{$\vec{u} - \vec{v}$};
+               \node at (axis cs:0.05,0.07){$\theta$};
   }]
 \end{axis}
 \end{tikzpicture}
@@ -64,5 +66,55 @@ Let $\theta$ denote the angle between $\vec{u}$ and $\vec{v}$. Using the Law of 
 \]
 This is the geometric definition of the dot product, which allows us to find the angle between two vectors easily.
 
+\subsection{The Cauchy-Schwarz Inequality, Triangle Inequality}
+\begin{theorem}[Cauchy-Schwarz Inequality]
+If $\vec{u}$ and $\vec{v}$ are vectors in $\mathbb{R}^n$, then $|\vec{u}\cdot\vec{v}| \le \norm{\vec{u}}\norm{\vec{v}}$.
+\end{theorem}
+
+\begin{proof}
+Rearranging the geometric definition of the dot product, we get $\cos{\theta} = \frac{\vec{u} \cdot \vec{v}}{\norm{\vec{u}}\norm{\vec{v}}}$. And since $|\cos{\theta}| \le 1$, we get that $ \left|\frac{\vec{u} \cdot \vec{v}}{\norm{\vec{u}}\norm{\vec{v}}}\right| \le 1 \to |\vec{u} \cdot \vec{v}| \le \norm{\vec{u}}\norm{\vec{v}}$.
+\end{proof}
+
+\begin{theorem}[Triangle Inequality]
+If $\vec{u}$ and $\vec{v}$ are vectors in $\mathbb{R}^n$, then $\norm{\vec{u} + \vec{v}} \le \norm{\vec{u}} + \norm{\vec{v}}$.
+\end{theorem}
+
+\begin{proof}
+\[
+\begin{aligned}
+\norm{\vec{u} + \vec{v}}^2 &= (\vec{u} + \vec{v})\cdot(\vec{u} + \vec{v}) \\
+&= \vec{u}\cdot\vec{u} + 2(\vec{u}\cdot\vec{v}) + \vec{v}\cdot\vec{v} \\
+&\le \norm{\vec{u}}^2 + 2|\vec{u}\cdot\vec{v}| + \norm{\vec{v}}^2  \\
+\end{aligned}
+\]
+By Cauchy-Schwarz:
+\[
+\begin{aligned}
+\norm{\vec{u} + \vec{v}}^2 &\le \norm{\vec{u}}^2 + 2\norm{\vec{u}}\norm{\vec{v}} + \norm{\vec{v}}^2 \\
+&= (\norm{\vec{u}} + \norm{\vec{v}})^2 \\
+\norm{\vec{u} + \vec{v}} &\le \norm{\vec{u}} + \norm{\vec{v}}
+\end{aligned}
+\]
+\end{proof}
+
+\subsection{Projections}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\coordinate (a) at (10,0);
+\coordinate (b) at (2.5,3);
+\coordinate (o) at (0,0);
+\coordinate (c) at (2.5,0);
+\draw[red,thick,->] (o) -- (a) node[midway,below]{$\vec{a}$};
+\draw[blue,thick,->] (o) -- (b) node[midway,above]{$\vec{b}$};
+\draw[green,->] (o) -- (c) node[midway,below]{$\proj_{\vec{a}}{\vec{b}}$};
+\draw[dotted] (b) -- (c);
+\node at (10.2,0) {$A$};
+\node at (-0.2,-0.2) {$O$};
+\node at (2.5,-0.2) {$C$};
+\node at (2.7,3.2) {$B$};
+\node at (0.5,0.2) {$\alpha$};
+\end{tikzpicture}
+\end{figure}
 
 \end{document}
