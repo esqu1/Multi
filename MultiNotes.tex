@@ -211,7 +211,8 @@ b &= \norm{\vec{a}}, h = \norm{\vec{b}}\sin{\alpha} \\
 \end{aligned}
 \]
 
-\section{Lines in Space}
+\section{Lines and Planes in Space}
+\subsection{Lines}
 To find an equation for a line, we need a specific point on the plane, as well as a vector that points in the direction of the line. Representing the specific point as a vector, Let $\vec{r_0} = \la x_0,y_0,z_0 \ra$ be the initial vector and $\vec{v} = \la a,b,c \ra$ be the vector that points in the direction of the line.
 
 Then, we can hit all such points on the line and represent any arbitrary point as $\vec{r_0} + t\vec{v}$, where $t$ is a parameter. As $t$ varies, we will hit all the points on the line. This gives rise to three forms of the equation of a line:
@@ -226,6 +227,20 @@ y = y_0 + bt \\
 z = z_0 + ct
 \end{cases}
 \]
+\item Symmetric form\footnote{This can be derived by isolating $t$ in the above equations and setting them equal to each other.}:
+\[ \frac{x - x_0}{a} = \frac{y - y_0}{b} = \frac{z - z_0}{c} \]
 \end{itemize}
+
+\subsection{Planes}
+Let $P_0(x_0,y_0,z_0)$ be a given point on a plane, and $P(x,y,z)$ an arbitrary point on the plane. Let $\vec{n}$ be the normal\footnote{Orthogonal/perpendicular.} to the plane at $P_0$. Now since $\vec{n} \perp \overrightarrow{P_0P}$, we have that
+\[
+\begin{aligned}
+\vec{n} \cdot \overrightarrow{P_0P} &= 0 \\ 
+\la a,b,c \ra \cdot \la x-x_0, y-y_0, z-z_0 \ra &= 0 \\
+\Aboxed{a(x-x_0) + b(y-y_0) + c(z-z_0) &= 0} 
+\end{aligned}
+\]
+
+This is the \textbf{point-normal form} of the equation of the line. We could also move the constant terms to one side to obtain $ax+by+cz = d$, the \textbf{standard form} of the equation.
 
 \end{document}
