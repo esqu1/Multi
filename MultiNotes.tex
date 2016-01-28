@@ -167,5 +167,25 @@ The magnitude of this vector is given by: \[ \norm{\vec{a} \times \vec{b}} = \no
 The direction of this vector is orthogonal to the vector, but which direction exactly? We have two different options. The convention is to use the right-hand rule: point your fingers towards $\vec{a}$ and sweep them towards your palm towards $\vec{b}$. Your thumb points in the direction of the product.
 
 \subsection{Volume of a Parallelogram}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\coordinate (a) at (10,0);
+\coordinate (b) at (2.5,3);
+\coordinate (o) at (0,0);
+\coordinate (c) at (2.5,0);
+\coordinate (d) at (12.5,3);
+\draw[red,thick,->] (o) -- (a) node[midway,below]{$\vec{a}$};
+\draw[blue,thick,->] (o) -- (b) node[midway,above]{$\vec{b}$};
+\draw[green,->] (o) -- (c) node[midway,below]{$\proj_{\vec{a}}{\vec{b}}$};
+\draw[black] (a) -- (d) -- (b);
+\draw[dotted] (b) -- (c);
+\node at (10.2,0) {$A$};
+\node at (-0.2,-0.2) {$O$};
+\node at (2.5,-0.2) {$C$};
+\node at (2.7,3.2) {$B$};
+\node at (0.5,0.2) {$\alpha$};
+\end{tikzpicture}
+\end{figure}
 
 \end{document}
