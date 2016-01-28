@@ -116,5 +116,56 @@ By Cauchy-Schwarz:
 \node at (0.5,0.2) {$\alpha$};
 \end{tikzpicture}
 \end{figure}
+$\overrightarrow{OC}$ is the vector projection  of $\overrightarrow{OB}$ ($\vec{b}$) onto $\overrightarrow{OA}$ ($\vec{a}$). This is denoted as $\proj_{\vec{a}}{\vec{b}}$. \\
+The magnitude of this projection, $\norm{\overrightarrow{OC}}$, is denoted as $\comp_{\vec{a}}{\vec{b}}$. \\ \\
+To describe $\overrightarrow{OC}$, we need its direction and magnitude.
+\begin{itemize}
+\item Direction is given by the unit vector in the direction if $\vec{a}$, which is $\frac{\vec{a}}{\norm{\vec{a}}}$.
+\item Magnitude is given by:
+\[
+\begin{aligned}
+\norm{\overrightarrow{OC}} &= \norm{\vec{b}}\cos{\alpha} \\
+&= \norm{\vec{b}} \frac{\vec{a} \cdot \vec{b}}{\norm{\vec{a}}\norm{\vec{b}}} = \frac{\vec{a} \cdot \vec{b}}{\norm{\vec{a}}}
+\end{aligned}
+\]
+Therefore, \[ 
+\begin{aligned}
+\overrightarrow{OC} &= \frac{\vec{a} \cdot \vec{b}}{\norm{\vec{a}}}\left(\frac{\vec{a}}{\norm{\vec{a}}}\right) = \frac{\vec{a} \cdot \vec{b}}{\norm{\vec{a}}^2} \\ 
+\Aboxed{\proj_{\vec{a}}{\vec{b}} &= \frac{\vec{a} \cdot \vec{b}}{\norm{\vec{a}}^2}\vec{a}}
+\end{aligned}
+\]
+\end{itemize}
+
+We can also easily see that, from this,  $\boxed{\comp_{\vec{a}}{\vec{b}} = \dfrac{\vec{a} \cdot \vec{b}}{\norm{\vec{a}}}}$.
+
+\subsection{Direction Cosines}
+In 3-space, the direction cosines give the cosines of the angles formed between a vector and the three axes.
+
+If $\alpha, \beta, \gamma$ are the angles that the vector $\vec{A} = \la A_x, A_y, A_z \ra$ makes with the $x$, $y$, and $z$ axes respectively, then:
+\[
+\begin{aligned}
+\vec{A} &= \la A_x, A_y, A_z \ra \\
+&= \la \norm{\vec{A}}\cos{\alpha}, \norm{\vec{A}}\cos{\beta}, \norm{\vec{A}}\cos{\gamma} \\
+&= \norm{\vec{A}} \la \cos{\alpha}, \cos{\beta}, \cos{\gamma} \ra
+\end{aligned}
+\]
+
+\subsection{The Cross/Vector Product}
+The cross product returns a vector that is orthogonal (perpendicular) to the two vectors in question. 
+
+The proof is omitted, but if $\vec{a}$ and $\vec{b}$ are vectors, then 
+\[ \vec{a} \times \vec{b} =
+\begin{vmatrix}
+\ihat & \jhat & \khat \\
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3 
+\end{vmatrix} 
+\]
+
+The magnitude of this vector is given by: \[ \norm{\vec{a} \times \vec{b}} = \norm{\vec{a}}\norm{\vec{b}}\sin{\theta} \]
+
+The direction of this vector is orthogonal to the vector, but which direction exactly? We have two different options. The convention is to use the right-hand rule: point your fingers towards $\vec{a}$ and sweep them towards your palm towards $\vec{b}$. Your thumb points in the direction of the product.
+
+\subsection{Volume of a Parallelogram}
 
 \end{document}
