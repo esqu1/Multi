@@ -313,7 +313,7 @@ Let $\vec{r_1}(s) = \vec{r}(\varphi(s))$; this is our new parameterization. We w
 Do note that $\pvec{r}'(\phi(s))$ is $\pvec{r}'(t)$ EVALUATED at $t = \varphi(s)$. Then,
 \[
 \begin{aligned}
-\varphi'(s) = \frac{dt}{ds} &= \frac{1}{\frac{ds}{dt}} \\
+\varphi'(s) = \dfrac{dt}{ds} &= \frac{1}{\frac{ds}{dt}} \\
 &= \frac{1}{s'(t)} \\
 &= \frac{1}{s'(\varphi(s))} \\
 &= \frac{1}{\norm{\pvec{r}'(\varphi(s))}}
@@ -341,11 +341,48 @@ Noting that $dt = \phi'(u) \ du$, we do u-substitution:
 \end{aligned}
 \]
 \end{proof}
-
+\newpage
 \subsection{Curvature}
-\textbf{Curvature}, represented by the Greek letter $\kappa$ (kappa), is how fast the direction of a certain curve is changing. We will look at two definitions of curvature.
+\textbf{Curvature}, represented by the Greek letter $\kappa$ (kappa), is how fast the direction of a certain curve is changing. We will look at two definitions of curvature. We prove the result for plane curves, but the results can be extended to space curves.
 \begin{enumerate}
-\item 
+\item $\kappa = \left|\frac{d\theta}{ds}\right|$ \\
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}[grid=major,axis x line=middle,
+             axis y line=middle,
+             after end axis/.code={
+               \draw[red,thick,->] (axis cs:2,14) -- (axis cs:4,22) node[midway,below]{$\vec{T}(t)$};
+               \node at (axis cs:-0.6,2) {$\theta$};
+  }]
+
+\addplot[color=blue]{x^2+10};
+\addplot[color=black]{0};
+\addplot[color=red]{4*x+6};
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+Suppose $\vec{r}(t) = \la x(t), y(t) \ra$. Note that \[ \tan{\theta} = \frac{dy}{dx} = \dfrac{\frac{dy}{dt}}{\frac{dx}{dt}} = \frac{y'(t)}{x'(t)} \]
+And $\theta = \tan^{-1}\left(\frac{y'(t)}{x'(t)}\right)$. Since $\frac{d\theta}{ds} = \frac{d\theta}{dt}\frac{dt}{ds}$ by the Chain Rule, then,
+\[ 
+\begin{aligned}
+\frac{d\theta}{dt} &= \dfrac{1}{1 + {[}\frac{y'(t)}{x'(t)}{]}^2} \cdot \frac{d}{dt}\left(\frac{y'(t)}{x'(t)}\right) \\
+\frac{dt}{ds} &= \dfrac{1}{\frac{ds}{dt}} = \frac{1}{\sqrt{{[}x'(t){]}^2 + {[}y'(t){]}^2}} \\
+\frac{d\theta}{ds} &= \dfrac{1}{1 + {[}\frac{y'(t)}{x'(t)}{]}^2} \cdot \frac{d}{dt}\left(\frac{y'(t)}{x'(t)}\right) \cdot  \frac{1}{\sqrt{{[}x'(t){]}^2 + {[}y'(t){]}^2}} \\
+&= \dfrac{x'y''-y'x''}{{[}(x')^2+(y')^2{]}^{\frac{3}{2}}} \\
+\Aboxed{\kappa &= \dfrac{\norm{\pvec{r}'(t) \times \pvec{r}''(t)}}{\norm{\pvec{r}'(t)}^3}} \\
+\end{aligned}
+\]
+\item $\kappa = \norm{\frac{d\vec{T}}{ds}}$
+\[ 
+\begin{aligned}
+\frac{d\vec{T}}{ds} &= \frac{d\vec{T}}{dt} \frac{dt}{ds} = \frac{\pvec{T}'(t)}{\norm{\pvec{r}'(t)}} \\
+\left|\left|\frac{d\vec{T}}{ds}\right|\right| &= \boxed{\kappa = \frac{\norm{\pvec{T}'(t)}}{\norm{\pvec{r}'(t)}}}
+\end{aligned}
+\]
+
+
+
 \end{enumerate}
 
 \end{document}
