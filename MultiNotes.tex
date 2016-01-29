@@ -454,6 +454,41 @@ a_N &= \frac{\norm{\pvec{r}'(t) \times \pvec{r}''(t)}}{\norm{\pvec{r}'(t)}}
 
 I don't have the proofs of these on me now; they're on a handout somewhere that I'm trying to find.
 
+\section{Multivariate Functions}
+A function of $n$-variables $x_1,x_2,\dots,x_n$ is a rule that maps/assigns to each $n$-tuple in a set $D \subseteq \mathbb{R}^n$ a unique value $z = f(x_1,x_2,\dots,x_n) \in \mathbb{R}$. In other words, $f:\mathbb{R}^n \rightarrow \mathbb{R}$.
+
+We introduce some terminology to discuss sets in Euclidean space:
+\begin{itemize}
+\item $(x_0,y_0)$ is an \textbf{interior point} of a region $\mathcal{R}$ if it is the center of a disk contained entirely within $\mathcal{R}$.
+\item $(x_0,y_0)$ is a \textbf{boundary point} of a region $\mathcal{R}$ if all such disks centered at $(x_0,y_0)$ contain both exterior and interior points.
+\item An \textbf{open region} consists solely of interior points.
+\item A \textbf{closed region} consists of both interior and boundary points.
+\item A \textbf{bounded region} can be contained within a disk of finite radius.
+\item An \textbf{unbounded region} cannot be contained within a disk of finite radius.
+\end{itemize}
+
+\subsection{Function Notation}
+There are 2 forms:
+\begin{itemize}
+\item Explicit form: $z = f(x_1,x_2,\dots,x_n)$
+\item Implicit form: $F(x_1,x_2,\dots,x_n,z) = 0$
+\end{itemize}
+
+The graph of a multivariate function of 2 variables $z=f(x,y)$ is called a \textbf{surface} and consists of all points $(x,y,z)$ for which $z = f(x,y)$ and $(x,y)$ is in the domain of $f$. We can extend this to functions of 3-variables; however, we can't physically draw the graph as it would involve 4-dimensional space$\dots$
+
+\subsection{Level Curves}
+A \textbf{level curve} is the set of all points $(x,y)$ in the domain of $f$  such that $f(x,y) = k$. If we envision the surface on a graph, the level curves would give all the points at the same elevation from the $xy$-plane. By combining multiple level curves, we can create a contour map of a function's graph.
+
+Note that two level curves will never intersect; if they intersected, say at a point $(x_0,y_0)$, then $f(x_0,y_0)$ would take on two different values, a contradiction.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{level}
+\end{figure}
+
+\subsection{Limits of Multivariate Functions}
+Previously when we defined limits for single-variable functions, $x$ would approach a certain value $a$ along the $x$-axis either from the positive direction or the negative direction, so we could check both to make sure that they exist and are equal. However, in a multivariate function, there are infinitely many ways to approach a point $(x_0,y_0)$, via different paths. Therefore, we 
+
 \end{enumerate}
 
 \end{document}
