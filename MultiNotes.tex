@@ -387,6 +387,26 @@ Now we show these two expressions are equivalent, namely the following theorem:
 The curvature of a curve $\vec{r}(t)$ is given by $\kappa = \left|\left|\frac{d\vec{T}}{ds}\right|\right| = \dfrac{\norm{\pvec{r}'(t) \times \pvec{r}''(t)}}{\norm{\pvec{r}'(t)}^3}$
 \end{theorem}
 
+\begin{proof}
+By definition, $\vec{T}(t) = \frac{\pvec{r}'(t)}{\norm{\pvec{r}'(t)}}$ and $\norm{\pvec{r}'(t)} = s'(t)$, so we can write \[ \pvec{r}'(t) = s'(t)\pvec{T}'(t) \]
+Differentiating, we get \[ \pvec{r}''(t) = s''(t)\pvec{T}(t) + s'(t)\pvec{T}'(t) \]
+Then,
+\[
+\begin{aligned}
+\pvec{r}'(t) \times \pvec{r}''(t) &= s'(t)\pvec{T}(t) \times {[}s''(t)\pvec{T}(t) + s'(t)\pvec{T}'(t){]} \\ 
+&= {[}s'(t)\pvec{T}(t) \times s''(t)\pvec{T}(t){]} + {[}s'(t)\pvec{T}(t) \times s'(t)\pvec{T}'(t){]} \\
+&= \underbrace{s'(t)s''(t){[}\pvec{T}(t) \times \pvec{T}(t){]}}_{\vec{0}} + {[}s'(t){]}^2{[}\pvec{T}(t) \times \pvec{T}'(t){]} \\
+&= {[}s'(t){]}^2{[}\pvec{T}(t) \times \pvec{T}'(t){]} \\ \\
+\norm{\pvec{T}(t) \times \pvec{T}'(t)} &= \norm{\pvec{T}(t)}\norm{\pvec{T}'(t)}\sin{\frac{\pi}{2}} \\
+&= \norm{\pvec{T}'(t)} \\ \\
+\norm{\pvec{r}(t) \times \pvec{r}'(t)} &= {[}s'(t){]}^2\norm{\pvec{T}'(t)} \\
+&= \norm{\pvec{r}'(t)}^2\norm{\pvec{T}'(t)} \\
+&= \norm{\pvec{r}'(t)}^2(\norm{\pvec{r}'(t)}\kappa) \\
+\kappa &= \dfrac{\norm{\pvec{r}'(t) \times \pvec{r}''(t)}}{\norm{\pvec{r}'(t)}^3}
+\end{aligned}
+\]
+\end{proof}
+
 \end{enumerate}
 
 \end{document}
