@@ -409,6 +409,51 @@ Then,
 
 By considering the curve $\vec{r}(t) = \la a\cos{t}, a\sin{t}, 0 \ra$, which is the path of a circle, you can prove that the curvature of a circle with radius $a$ is $\kappa = \frac{1}{a}$.
 
+It is also possible to prove (the details are not shown here) that for a function $y = f(x)$, the curvature is given by:
+\[ \kappa(x) = \dfrac{|f''(x)|}{{[}1+{[}f'(x){]}^2{]}^{\frac{3}{2}}} \]
+
+\subsection{The Osculating Circle}
+An \textbf{osculating circle} at a point $P$ on a curve $C$:
+\begin{itemize}
+\item Has the same curvature as $C$ at $P$
+\item Same tangent vector/tangent line
+\item Same principal normal vector
+\item Has radius $\frac{1}{\kappa}$
+\end{itemize}
+
+\subsection{Binormal Vector}
+The \textbf{binormal vector}, defined as $\vec{B} = \vec{T} \times \vec{N}$, enables us to create a moving coordinate system of a particle moving along a curve. We can define the coordinate planes of this reference frame:
+\begin{itemize}
+\item The \textbf{osculating plane}, consisting of $\vec{T}$ and $\vec{N}$
+\item The \textbf{normal plane}, consisting of $\vec{N}$ and $\vec{B}$
+\item The \textbf{rectifying plane}, consisting of $\vec{T}$ and $\vec{B}$
+\end{itemize}
+
+\subsection{Motion in Space}
+Using basic knowledge of physics, the velocity vector of a particle following the path $\vec{r}(t)$ is given by $\vec{v}(t) = \pvec{r}'(t)$, and the acceleration is given by $\vec{a}(t) = \pvec{r}''(t)$. We can also get the speed as the magnitude of the velocity, which is $v(t) = \norm{\pvec{r}'(t)}$.
+
+However, it is useful to know what the tangential and normal components of acceleration are rather than solely the $x$ and $y$ components. Here, we derive the formulas for those.
+
+Recall that \[ \pvec{T}(t) = \frac{\pvec{r}'(t)}{\norm{\pvec{r}'(t)}} = \frac{v(t)}{\norm{\vec{v}(t)}} \rightarrow \vec{v}(t) = v(t)\vec{T}(t) \]
+
+Differentiating: \[ \vec{a}(t) = v'(t)\vec{T}(t) + v(t)\pvec{T}'(t) \]
+
+Recall that $\pvec{N}(t) = \frac{\pvec{T}'(t)}{\norm{\pvec{T}'(t)}} \rightarrow \pvec{T}'(t) = \norm{\pvec{T}'(t)}\vec{N}(t)$, and that $\kappa = \frac{\norm{\pvec{T}'(t)}}{\norm{\pvec{r}'(t)}} \rightarrow \norm{\pvec{T}'(t)} = \kappa v(t)$ 
+
+Substituting: \[ \vec{a}(t) = v'(t)\vec{T}(t) + \kappa{[}v(t){]}^2\vec{N}(t) \]
+
+The tangential component is given by $a_T = v'(t)$, and the normal component is given by $a_N = \kappa{[}v(t){]}^2$. 
+
+There are other formulas for these:
+\[
+\begin{aligned}
+a_T &= \frac{\pvec{r}'(t) \cdot \pvec{r}''(t)}{\norm{\pvec{r}'(t)}} \\
+a_N &= \frac{\norm{\pvec{r}'(t) \times \pvec{r}''(t)}}{\norm{\pvec{r}'(t)}}
+\end{aligned}
+\]
+
+I don't have the proofs of these on me now; they're on a handout somewhere that I'm trying to find.
+
 \end{enumerate}
 
 \end{document}
