@@ -386,6 +386,7 @@ And $\theta = \tan^{-1}\left(\frac{y'(t)}{x'(t)}\right)$. Since $\frac{d\theta}{
 \left|\left|\frac{d\vec{T}}{ds}\right|\right| &= \boxed{\kappa = \frac{\norm{\pvec{T}'(t)}}{\norm{\pvec{r}'(t)}}}
 \end{aligned}
 \]
+\end{enumerate}
 
 Now we show these two expressions are equivalent, namely the following theorem:
 
@@ -565,12 +566,38 @@ In two or more variables:
 \begin{enumerate}
 \item $
 \begin{aligned}
-\text{Existence of } f_x,f_y \not &\Rightarrow f \text{ is continuous} \\
-\not &\Rightarrow f \text{ is differentiable}
+\text{Existence of } f_x,f_y &\not \Rightarrow f \text{ is continuous} \\
+&\not \Rightarrow f \text{ is differentiable}
+\end{aligned}$
+\item $
+\begin{aligned}
+\text{Continuity of } f_x,f_y &\Rightarrow f \text{ is continuous} \\ 
+&\Rightarrow f \text{ is differentiable}
 \end{aligned}
 $
+\item $f$ is differentiable $\not \Rightarrow f$ is continuous 
 \end{enumerate}
 
-\end{enumerate}
+In one variable, the necessary condition for a function $f$ to be differentiable at $x_0$ if we can write $\Delta f$ as: \[ \Delta f = f(x+\Delta x) - f(x) = f'(x_0)\Delta x + \varepsilon \Delta x \] 
+where as $\Delta x \to 0$, $\varepsilon \to 0$.
+
+In two variables:
+\begin{itemize}
+\item Suppose $f(x,y)$ is defined at each point in a disk centered at $(x_0,y_0)$ and that contains $(x+\Delta x, y+\Delta y)$.
+\item Then we say $f(x,y)$ is differentiable at $(x_0,y_0)$ if $\Delta f$ can be written as: \[ \Delta f = f(x+\Delta x,y+\Delta y) - f(x,y) = f_x(x,y) \Delta x + f_y(x,y) \Delta y + \varepsilon_1\Delta x + \varepsilon_2\Delta y \] where $\varepsilon_1,\varepsilon_2 \to 0$ as $\Delta x, \Delta y \to 0$.
+\end{itemize}
+
+To illustrate this tedious definition, we introduce an example: show that $z = f(x,y) = x^2y - 1$ is differentiable. \\ \\
+
+Note that $f_x = 2xy$ and $f_y = x^2$. We compute:
+\[
+\begin{aligned}
+\Delta f &= f(x+\Delta x,y + \Delta y) - f(x,y) \\
+&= (x+\Delta x)^2(y+\Delta y) - 1 - (x^2y - 1) \\
+&= x^2y + 2xy\Delta x + y(\Delta x)^2 + x^2\Delta y + 2x\Delta x \Delta y + \Delta y(\Delta x)^2 - x^2y \\
+&= (2xy)\Delta x + (x^2)\Delta y + (y\Delta x)\Delta x + (2x\Delta x + (\Delta x)^2)\Delta y 
+\end{aligned}
+\]
+By taking $\varepsilon_1 = y\Delta x$, $\varepsilon_2 = 2x\Delta x + (\Delta x)^2$, we have satisfied our condition for differentiability.
 
 \end{document}
