@@ -498,6 +498,66 @@ For example, consider:
 \[ \lim_{(x,y) \rightarrow (0,0)}{\frac{-3xy}{x^2+y^2}} \]
 If we try and plug in $(0,0)$ directly, we get $\frac{0}{0}$, which is not possible. So instead, we choose a path that we can take the limit on.
 
+We can first let $y=0$; then the limit becomes \[ \lim_{(x,0) \rightarrow (0,0)}{\frac{-3x(0)}{x^2+(0)^2}} = \lim_{(x,0) \rightarrow (0,0)}{0} = 0 \]
+However, if we let $y = x$: \[ \lim_{(x,x) \rightarrow (0,0)}{\frac{-3x^2}{2x^2}} = \lim_{(x,x) \rightarrow (0,0)}{-\frac{3}{2}} = \frac{3}{2} \]
+But we have obtained two different values for the limit. Therefore, this limit does not exist.
+
+One other way you can compute limits in two dimensions is to use polar coordinates. Note that as $(x,y) \rightarrow (0,0)$, then $r \rightarrow 0$, so we can convert our initial problem into a single variable limit. In our example:
+
+\[ 
+\begin{aligned}
+\lim_{(x,y) \rightarrow (0,0)}{\frac{-3xy}{x^2+y^2}} &= \lim_{r \rightarrow 0}{\frac{-3(r\cos{\theta})(r\sin{\theta})}{(r\cos{\theta})^2 + (r\sin{\theta})^2}} \\
+&= \lim_{r \rightarrow 0}{\frac{-3r^2\cos{\theta}\sin{\theta}}{r^2(\cos^2{\theta} + \sin^2{\theta})}} \\
+&= \lim_{r \rightarrow 0}{-\frac{3}{2}\sin{2\theta}} 
+\end{aligned}
+\]
+
+But this limit does not exist, since we know nothing about the value of $\theta$ or where it's approaching.
+
+\subsection{Partial Derivatives}
+Now, we investigate rates of changes in multivariate functions. In a function of two variables $z = f(x,y)$, it is often useful to see how the function behaves in the $x$ and the $y$ directions. This can be accomplished by holding one of the variables constant, and allowing the other one to vary. 
+
+If we hold $y$ constant, say at $y = y_0$, then $z = f(x,y_0)$ is now a function of one variable, and we can analyze the rate of change with respect to $x$ by taking $\frac{d}{dx}$. In multivariate functions, these are known as \textbf{partial derivatives}, denoted and defined as:
+\[
+\begin{aligned}
+\frac{\partial f}{\partial x} &= f_x(x,y) = \lim_{\Delta x \rightarrow 0}{\frac{f(x+\Delta x,y) - f(x,y)}{\Delta x}} \\
+\frac{\partial f}{\partial y} &= f_y(x,y) = \lim_{\Delta y \rightarrow 0}{\frac{f(x,y+\Delta y) - f(x,y)}{\Delta y}}
+\end{aligned}
+\]
+
+Note that the partial derivative (in this case, w.r.t. $x$) actually give us the slope of the tangent line at $(a,b)$ to the curve of intersection of the surface $z = f(x,y)$ with the plane $y = b$.
+
+We can denote higher-order partial derivatives (commonly known as ``partials'') as:
+\[ \frac{\partial^2f}{\partial x^2} = f_{xx}(x,y) \text{ (second partial)} \quad \text{and} \quad \frac{\partial^2f}{\partial y \ \partial x} = f_{xy}(x,y)\text{ (partial w.r.t. } x\text{, then } y \text{)} \]
+
+\subsection{Equality of Mixed Partials Theorem/Clairaut's Theorem}
+It turns out that if the partials are continuous within $f$, the following powerful theorem is true:
+
+\begin{theorem}[Equality of Mixed Partials Theorem/Clairaut's Theorem]
+If $f(x,y)$ and its partial derivatives $f_x$, $f_y$, $f_{xy}$, $f_{yx}$ are defined in a region containing $(a,b)$ and all are continuous in said region, then $f_{xy}(a,b) = f_{yx}(a,b)$.
+\end{theorem}
+
+\begin{proof}
+Pick $h,k>0$ such that $(a+h,b)$, $(a,b+k)$, and $(a+h,b+k)$ are all within the same said region. Our goal is to show that \[ f_{xy}(a,b) = f_{yx}(a,b) = \lim_{hk \rightarrow 0}{\frac{f(a+h,b+k) - f(a+h,b) - f(a,b+k) + f(a,b)}{hk}} \]
+We will prove this for $f_{xy}(a,b)$; the proof for $f_{yx}(a,b)$ is analogous and will be left as an exercise. \\ \\
+Let $g(x) = f(x,b+k) - f(x,b)$. Notice that $g$ is continuous and differentiable on $(a,a+k)$, and that \[ g(a+h) - g(a) = f(a+h,b+k) - f(a+h,b) - f(a,b+k) + f(a,b) \]
+Applying the Mean Value Theorem on $g$, we get that $\exists c \in (a,a+k)$ such that \[ g'(c) = \frac{g(a+h) - g(a)}{h} \rightarrow g(a+h) - g(a) = hg'(c) \]
+But $g'(x) = f_x(x,b+k) - f_x(x,b)$ from how we defined $g$, so \[ g(a+h) - g(a) = h[f_x(c,b+k) - f_x(c,b)] \]
+Now, we apply the Mean Value Theorem to $f_x$ (w.r.t $y$) on $(b,b+k)$: $\exists e \in (b,b+k)$ such that \[ f_{xy}(c,e) = \frac{f_x(c,b+k) - f_x(c,b)}{k} \rightarrow f_x(c,b+k) - f_x(c,b) = kf_{xy}(c,e) \]
+Substituting: 
+\[ 
+\begin{aligned} 
+hkf_{xy}(c,e) &= g(a+h) - g(a) \\ 
+f_{xy}(c,e) &= \frac{g(a+h) - g(a)}{hk} \\
+&= \frac{f(a+h,b+k) - f(a+h,b) - f(a,b+k) + f(a,b)}{hk} \end{aligned} \]
+And \[ 
+\begin{aligned}
+\lim_{hk \rightarrow 0}{f_{xy}(c,e)} &= \lim_{(c,e) \rightarrow (a,b)}{f_{xy}(c,e)} \\
+&= f_{xy}(a,b) \\
+f_{xy}(a,b) &= \lim_{hk \rightarrow 0} {\frac{f(a+h,b+k) - f(a+h,b) - f(a,b+k) + f(a,b)}{hk}} 
+\end{aligned} \]
+\end{proof}
+
 \end{enumerate}
 
 \end{document}
