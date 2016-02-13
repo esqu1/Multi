@@ -575,6 +575,7 @@ In two or more variables:
 &\Rightarrow f \text{ is differentiable}
 \end{aligned}
 $
+
 \item $f$ is differentiable $\not \Rightarrow f$ is continuous 
 \end{enumerate}
 
@@ -604,6 +605,123 @@ By taking $\varepsilon_1 = y\Delta x$, $\varepsilon_2 = 2x\Delta x + (\Delta x)^
 We wish to investigate tangent planes to a surface $z = f(x,y)$. \\ \\
 Let the plane be tangent at $P_0(x_0,y_0,z_0)$, and $\la A,B,C \ra$ be the normal to the plane. Let $P(x,y,z)$ be an arbitrary point in the plane. Then $\overrightarrow{P_0P} = \la x-x_0, y-y_0, z-z_0 \ra$. 
 
-Note that $\la A,B,C \ra \cdot \overrightarrow{P_0P} = 0$, and therefore, $A(x-x_0) + B(y-y_0) + C(z-z_0) = 0$. % to be continued
+Note that $\la A,B,C \ra \cdot \overrightarrow{P_0P} = 0$, and therefore, $A(x-x_0) + B(y-y_0) + C(z-z_0) = 0$ (or $-\frac{A}{C}(x-x_0) - \frac{B}{C}(y-y_0) - (z - z_0) = 0$). % to be continued
+
+Letting $x = x_0$, we get the tangent line to the surface on the plane $x = x_0$, which has slope $f_y(x_0,y_0)$, so $\frac{-B}{C} = f_y(x_0,y_0)$. By an analagous argument, $\frac{-A}{C} = f_x(x_0,y_0)$.
+
+Our equation for the tangent plane then becomes:\[ \boxed{z - z_0 = f_x(x_0,y_0)(x-x_0) + f_y(x_0,y_0)(y-y_0)} \]
+
+\subsection{Approximations}
+Just like we can use tangent lines to approximate values of a single-variable function, we can approximate values of a multivariate function by using a tangent plane. 
+
+For some $(x_0,y_0)$ very close to a point $(a,b)$:
+\[ \boxed{f(x_0,y_0) \approx f(a,b) + f_x(a,b)(x_0 - a) + f_y(a,b)(y_0-b)} \]
+Notice how the expression gives you the value if the point were on the tangent plane to $(a,b)$. \\ \\
+We can also estimate the change in a function given the change in $x$ and $y$. Looking at the equation for a tangent plane, we can set the differential changes $dz = z - f(a,b)$, $dx = x-a$ and $dy = y-a$ to arrive at an expression for the function value change from $(a,b) \to (x_0,y_0)$:
+\[ \boxed{\Delta z \approx dz = f_x(a,b)dx + f_y(a,b)dy} \]
+
+\subsection{Chain Rule}
+We state the general case of the Chain Rule here:
+\begin{theorem}[Multivariate Chain Rule]
+Given a differentiable function $z = f(x_1,x_2,\dots,x_n)$ where $x_i = x_i(t_1,t_2,\dots,t_m)$ for $i \in [1,n]$, the partial of $z$ with respect to $t_j$ with $j \in [1,m]$ is given by:
+\[ \frac{\partial z}{\partial t_j} = \frac{\partial z}{\partial x_1}\frac{\partial x_1}{\partial t_j} + \frac{\partial z}{\partial x_2}\frac{\partial x_2}{\partial t_j} + \cdots + \frac{\partial z}{\partial x_n}\frac{\partial x_n}{\partial t_j} = \sum_{i = 1}^n\left(\frac{\partial z}{\partial x_i}\frac{\partial x_i}{\partial t_j}\right) \]
+\end{theorem}
+
+\begin{proof}
+We can extend our definition of differentiability to $n$ variables; i.e. if $z = f(x_1,x_2,\dots, x_n)$ then $f$ is differentiable if we can write $\Delta z$ as:
+\[ \Delta z = \sum_{i=1}^n{\frac{\partial z}{\partial x_i}\Delta x_i} + \sum_{i=1}^n{\varepsilon_i\Delta x_i} \]
+where $\varepsilon_i \to 0$ as $\Delta x_i \to 0$. Then:
+\[
+\begin{aligned}
+\frac{\Delta z}{\Delta t_j} &= \sum_{i=1}^n{\frac{\partial z}{\partial x_i}\frac{\Delta x_i}{\Delta t_j}} + \sum_{i=1}^n{\varepsilon_i\frac{\Delta x_i}{\Delta t_j}} \\
+\lim_{\Delta t_j \to 0}{\frac{\Delta z}{\Delta t_j}}&= \sum_{i=1}^n{\left(\frac{\partial z}{\partial x_i}\lim_{\Delta t_j \to 0}{\frac{\Delta x_i}{\Delta t_j}}\right)} + \sum_{i=1}^n{\left(\lim_{\Delta t_j \to 0}\varepsilon_i\lim_{\Delta t_j \to 0}{\frac{\Delta x_i}{\Delta t_j}}\right)} \\
+\frac{\partial z}{\partial t_j} &= \sum_{i = 1}^n\left(\frac{\partial z}{\partial x_i}\frac{\partial x_i}{\partial t_j}\right) + \sum_{i = 1}^n\left(0\cdot \frac{\partial x_i}{\partial t_j}\right) \\
+\Aboxed{\frac{\partial z}{\partial t_j} &= \sum_{i = 1}^n\left(\frac{\partial z}{\partial x_i}\frac{\partial x_i}{\partial t_j}\right)= \frac{\partial z}{\partial x_1}\frac{\partial x_1}{\partial t_j} + \frac{\partial z}{\partial x_2}\frac{\partial x_2}{\partial t_j} + \cdots + \frac{\partial z}{\partial x_n}\frac{\partial x_n}{\partial t_j}}
+\end{aligned}
+\]
+
+\end{proof}
+
+\subsection{Implicit Function Theorem}
+Note that we can define a function $z = f(x,y)$ implicitly as $F(x,y,f(x,y)) = 0$. This is useful whenever we cannot solve for the value of $f$ directly.
+
+We formulate a theorem that gives the value of a function's partial derivative if it is defined implicitly.
+\begin{theorem}[Implicit Function Theorem]
+If $z = f(x,y)$ is a function that is given implicitly by the function $F(x,y,z) = F(x,y,f(x,y)) = 0$, then \[ \frac{\partial z}{\partial x} = -\frac{F_x}{F_z} \quad \text{and} \quad \frac{\partial z}{\partial y} = -\frac{F_y}{F_z}\]
+\end{theorem}
+
+\begin{proof}
+\[
+\begin{aligned}
+F(x,y,z) &= 0 \\
+\frac{\partial F}{\partial x} = \frac{\partial F}{\partial x}\frac{\partial x}{\partial x} + \frac{\partial F}{\partial y}\frac{\partial y}{\partial x} + \frac{\partial F}{\partial z}\frac{\partial z}{\partial x} &= 0\\
+\frac{\partial F}{\partial x}\cdot 1 + \frac{\partial F}{\partial y}\cdot 0 + \frac{\partial F}{\partial z}\frac{\partial z}{\partial x} &= 0 \\
+\frac{\partial F}{\partial x} + \frac{\partial F}{\partial z}\frac{\partial z}{\partial x} &= 0 \\
+\frac{\partial z}{\partial x} &= -\frac{\frac{\partial F}{\partial x}}{\frac{\partial F}{\partial z}} = -\frac{F_x}{F_z}
+\end{aligned}
+\]
+Analogously, \[ \frac{\partial z}{\partial y} = -\frac{\frac{\partial F}{\partial y}}{\frac{\partial F}{\partial z}} = -\frac{F_y}{F_z} \]
+\end{proof}
+
+\subsection{Directional Derivatives and the Gradient}
+Up until now, we have only explored rates of changes in the directions of $x$ and $y$. In this section, we explore rates of change in any arbitrary direction. \\\\
+
+We specify a certain direction with a unit vector $\vec{u} = \la a,b \ra$ in the $xy$-plane. Let $P(x_0,y_0,z_0)$ be a specific point on the surface $z=f(x,y)$ and let $P(x_0,y_0,0)$ be its projection onto the $xy$-plane. Choose an arbitrary point $Q(x,y,z)$ such that its $xy$ projection $Q'(x,y,0)$ forms the vector $\overrightarrow{P'Q'} = h\vec{u} = \la x-x_0, y-y_0,0 \ra = \la ha, hb \ra$.  \\ \\
+Our average rate of change from $P$ to $Q$ is given by: \[ \text{Average rate of change} = \frac{z-z_0}{h} = \frac{f(x,y) - f(x_0,y_0)}{h} = \frac{f(x_0 + ha,y_0 + hb) - f(x_0,y_0)}{h} \]
+
+To find our instantaneous rate of change, we take a limit: \[ \text{Instantaneous rate of change} = \lim_{h \to 0} \frac{f(x_0 + ha,y_0 + hb) - f(x_0,y_0)}{h} \]
+This instantaneous rate of change gives our directional derivative in the direction of $\vec{u}$, denoted $D_{\vec{u}}f(x_0,y_0)$. \\ \\
+If we look at $\frac{df}{dh}$:
+\[ 
+\begin{aligned}
+\frac{df}{dh} &= \frac{\partial f}{\partial x}\frac{dx}{dh} + \frac{\partial f}{\partial y}\frac{dy}{dh} \\
+&= \frac{\partial f}{\partial x}a + \frac{\partial f}{\partial y}b \\
+&= \la f_x, f_y \ra \cdot \la a,b \ra 
+\end{aligned}
+\]
+
+The vector $\la f_x,f_y \ra$ is called the \textbf{gradient} of $f$, denoted by the symbol $\grad$, and has many useful properties we will explore. Generalizing for a function $f(x_1,x_2,\dots,x_n)$:
+\[ \grad{f(x,y)} = \left\la \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n}\right \ra \]
+Therefore,
+\[ \boxed{D_{\vec{u}}{f(x,y)} = \grad{f(x,y)} \cdot \vec{u}} \]
+
+Let us look at two properties of the gradient.
+\begin{enumerate}
+\item Where does $f(x,y)$ increase most rapidly? It turns out the direction in which $f(x,y)$ increases most rapidly in given by the gradient vector. To see this, we write \[ D_{\vec{u}}f(x,y) = \grad{f(x,y)} \cdot \vec{u} = \norm{\grad{f(x,y)}}\norm{\vec{u}}\cos{\theta} = \norm{\grad{f(x,y)}}\cos{\theta} \]
+If $\grad{f(x,y)} \neq \vec{0}$, then the rate of change is maximal when $\cos{\theta} = 1$, or when $\vec{u}$ and $\grad{f(x,y)}$ are in the same direction. Thus, the gradient gives the direction of maximal increase. \\
+On the other hand, the rate of change is minimal when $\cos{\theta} = -1$, or when $\vec{u}$ and $\grad{f(x,y)}$ are in opposite directions, so $-\grad{f(x,y)}$ gives the minimal increase.
+\item Let us investigate the relation between level curves of a function and the gradient. Given a level curve $f(x,y) = k$, the function value is constant. Therefore, at any point on the curve the directional derivative is 0. 
+
+Also note that the unit tangent vector $\vec{T}$ is given by $\vec{u}$. Since $D_{\vec{u}}f(x,y) = \grad{f(x,y)} \cdot \vec{u} = 0$, we get that $\grad{f(x,y)}$ and $\vec{u}$ are orthogonal, and therefore the gradient is normal to the level curve. Formally, $\grad{f(x_0,y_0)}$ is normal to the level curve through $(x_0,y_0)$.
+
+Note that for functions of three variables, the gradient is orthogonal to the level surface rather than the level curve. 
+\end{enumerate}
+
+\subsection{Maxima/Minima}
+
+
+\section{Iterated Integrals}
+
+\subsection{Double Integrals}
+
+\subsection{Reversing the Order of Integration}
+
+\subsection{Triple Integrals} % not covered
+
+\subsection{Change of Variables}
+
+\section{Vector Calculus} % not covered
+
+\subsection{Line Integrals}
+
+\subsection{Conservative Vector Fields}
+
+\subsection{Green's Theorem}
+
+\subsection{Surface Integrals}
+
+\subsection{Divergence Theorem}
+
+\subsection{Stokes' Theorem}
 
 \end{document}
