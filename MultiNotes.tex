@@ -702,21 +702,121 @@ We can also define the maxima and minima of a multivariate function.
 
 If $f(x,y)$ is defined on a region containing $(x_0,y_0)$, with domain $\mathcal{D}$,
 \begin{enumerate}
-\item A \textbf{local maximum} occurs at $(x_0,y_0)$ if $f(x_0,y_0) \ge f(X,y)$ for all $(x,y)$ on an open disc centered at $(x_0,y_0)$.
-\item A \textbf{local minimum} occurs at $(x_0,y_0)$ if $f(x_0,y_0) \le f(X,y)$ for all $(x,y)$ on an open disc centered at $(x_0,y_0)$.
-\item An \textbf{absolute maximum} occurs at $(x_0,y_0)$ if $f(x_0,y_0) \ge f(X,y)$ for all $(x,y) \in \mathcal{D}$.
-\item An \textbf{absolute minimum} occurs at $(x_0,y_0)$ if $f(x_0,y_0) \le f(X,y)$ for all $(x,y) \in \mathcal{D}$.
+\item A \textbf{local maximum} occurs at $(x_0,y_0)$ if $f(x_0,y_0) \ge f(x,y)$ for all $(x,y)$ on an open disc centered at $(x_0,y_0)$.
+\item A \textbf{local minimum} occurs at $(x_0,y_0)$ if $f(x_0,y_0) \le f(x,y)$ for all $(x,y)$ on an open disc centered at $(x_0,y_0)$.
+\item An \textbf{absolute maximum} occurs at $(x_0,y_0)$ if $f(x_0,y_0) \ge f(x,y)$ for all $(x,y) \in \mathcal{D}$.
+\item An \textbf{absolute minimum} occurs at $(x_0,y_0)$ if $f(x_0,y_0) \le f(x,y)$ for all $(x,y) \in \mathcal{D}$.
+\end{enumerate}
+
+We also have the following analogy of the Extreme Value Theorem:
+\begin{theorem}[Extreme Value Theorem for Functions of 2 Variables]
+Let $f$ be a continuous function of 2 variables $x$ and $y$ defined on a closed, bounded region $\mathcal{R}$ in the $xy$-plane.
+\begin{enumerate}
+\item There is at least one point in $\mathcal{R}$ where $f$ takes on a global maximum value.
+\item There is at least one point in $\mathcal{R}$ where $f$ takes on a global minimum value.
+\end{enumerate}
+\end{theorem}
+
+And just like in single-variable calculus, a \textbf{critical point} is where the derivative is zero; in this case, when $\grad{f(x,y)} = \vec{0}$ or does not exist. \\ \\
+There are ways for us to tell whether or not a critical point is a relative minima or maxima, but first note that all relative extrema must be critical points (this can be proved easily). One powerful technique to analyze the extrema of a function is the Second Partials Test.
+\begin{theorem}[Second Partials Test]
+Let $z = f(x,y)$ be a function of two variables with continuous first and second partial derivatives in some disk containing $(a,b)$, where $f_x(a,b) = f_y(a,b) = 0$. Let the \textbf{discriminant} of $f$ be $D = f_{xx}(a,b)f_{yy}(a,b) - [f_{xy}(a,b)]^2$. Then:
+\begin{itemize}
+\item If $D > 0$ and $f_{xx}(a,b) < 0$, $f$ has a relative maximum at $(a,b)$.
+\item If $D > 0$ and $f_{xx}(a,b) > 0$, $f$ has a relative minimum at $(a,b)$.
+\item If $D < 0$, $f$ has a \textbf{saddle point} at $(a,b)$.
+\item If $D = 0$, the test is inconclusive.
+\end{itemize}
+\end{theorem}
+
+The proof of that this test works is quite convoluted, so the proof will be attached in a separate document.  \\ \\
+Note that this test works for unbounded regions to find absolute extrema. However, if we have a closed, bounded region, we must also check to see if there are extrema on the boundaries as well. Therefore, we can use the \textbf{Closed and Bounded Test} for these regions:
+\begin{enumerate}
+\item Find the function values at critical points interior to the region.
+\item Find the maxima/minima on the boundary points.
+\item Compare the values.
 \end{enumerate}
 
 \section{Iterated Integrals}
 
 \subsection{Double Integrals}
+In single variable calculus, we defined the definite integral \[ \int_a^b f(x) \ dx \] to be the area under $f(x)$ from $a$ to $b$. In multivariate calculus, we seek to find a way to compute the volume of the region under a surface within a rectangular region. 
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=2] % I should have used a \begin{axis} environment...
+  \draw [<->,thick] (0,2.5) node (yaxis) [above] {$y$} |- (3,0) node (xaxis) [right] {$x$};
+  \draw (0.5,0.5) -- (2.5,0.5) -- (2.5,2) -- (0.5,2) -- (0.5,0.5);
+  \foreach \i in {3.5,...,11.5}{\draw (0.2*\i,0.5)  -- (0.2*\i,2);}
+  \foreach \i in {6,...,19}{\draw (0.5,0.1*\i) -- (2.5,0.1*\i);}
+  \draw [fill opacity=0.5,fill=red] (1.3,1.2) -- (1.3,1.3) -- (1.5,1.3) -- (1.5,1.2) -- (1.3,1.2);
+  \draw [color=blue] (1.4,1.25) -- (1.4,2.3) -- (1.6,2.3);
+  \node [right] at (1.6,2.3) {$k^{\text{th}}$ subrectangle};
+  \node [below] at (0.5,0) {$a$};
+  \node [below] at (2.5,0) {$b$};
+  \node [left] at (0,0.5) {$c$};
+  \node [left] at (0,2) {$d$};
+  \node [below] at (2.7,0.5) {$\mathcal{R}$};
+\end{tikzpicture}
+\caption{$\mathcal{R}: [a,b] \times [c,d]$ partitioned.}
+\end{figure}
+
+We begin by partitioning our rectangle, which we define as $\mathcal{R}: [a,b] \times [c,d]$, into smaller subrectangles. The $x$-axis is partitioned at $x_0,x_1,\dots,x_m$ and the $y$-axis is partitioned into $y_0,y_1,\dots,y_n$. 
+
+Within each subrectangle, we choose a point $(x_k^*,y_k^*)$ that will give us the ``best approximation'' for the volume of the prism with that subrectangle as its base. Then the volume is given by:
+\[
+\begin{aligned}
+\text{Volume} &= \text{Area} \cdot \text{Height} \\
+\text{Area} &= \Delta x_k \Delta y_k = \Delta A_k \\
+\text{Height} &= f(x_k^*,y_k^*) \\
+V_k &= f(x_k^*,y_k^*)\Delta A_k \\
+V_{\text{solid}} &\approx \sum_{i=1}^Nf(x_k^*,y_k^*)\Delta A_k
+\end{aligned}
+\]
+We can define $\norm{\mathcal{P}}$ to be the norm of partition (in this case, the length of the diagonal of a subrectangle. \\ \\
+The \textbf{double integral} is defined by:
+\[ \iint_{\mathcal{R}} f(x,y) \ dA = \lim_{\norm{\mathcal{P}} \to 0} \sum_{k=1}^N f(x_k^*,y_k^*)\Delta A_k = \lim_{m,n \to \infty} \sum_{i=1}^m\sum_{j=1}^nf(x_{ij}^*,y_{ij}^*)\Delta A_{ij} \]
+This integral yields the ``signed volume'' below the surface $z = f(x,y)$, meaning that the integral can yield a negative answer.
+
+To compute such an integral for the rectangular region $\mathcal{R}$, we perform an integral within an integral. Our expression is equivalent to:
+\[ \iint_{\mathcal{R}} f(x,y) \ dA = \int_c^d\int_a^b f(x,y) \ dx \ dy \]
+
+\subsection{Double Integrals over General Regions}
+When dealing with general regions, we can divide them up into two categories:
+\begin{enumerate}
+\item Type I, or $x$-simple, regions, bounded by $a \le x \le b$ and $g_1(x) \le y \le g_2(x)$. In this case, our integral is \[ \int_a^b \int_{g_1(x)}^{g_2(x)}f(x,y) \ dy \ dx \]
+\item Type II, or $y$-simple, regions, bounded by $c \le y \le d$ and $h_1(y) \le x \le h_2(y)$. In this case, our integral is \[ \int_c^d \int_{h_1(y)}^{h_2(y)}f(x,y) \ dx \ dy \]
+\end{enumerate}
 
 \subsection{Reversing the Order of Integration}
+Because we can arbitrarily choose to integrate $x$ or $y$ first, this leads to a theorem:
+\begin{theorem}[Fubini's Theorem]
+If $f(x,y)$ is continuous over a rectangle $\mathcal{R}: [a,b] \times [c,d]$, then \[ \iint_{\mathcal{R}} f(x,y) \ dA = \int_c^d\int_a^b f(x,y) \ dx \ dy = \int_a^b f(x,y) \ dy \ dx \]
+\end{theorem}
+Fubini's Theorem only works if the bounds are constant values. If they are functions of another variable, the way to change the order of integration is by:
+\begin{enumerate}
+\item Sketching the region.
+\item Finding the bounds on $x$ and $y$.
+\item Rewriting the integral.
+\end{enumerate}
+We also have the following theorem:
+\begin{theorem}[Separation of Variables for Iterated Integrals]
+Let $g(x)$ and $h(y)$ be continuous functions on $[a,b]$ and $[c,d]$, respectively, along the $x$-axis and $y$-axis, respectively. Then $f(x,y) = g(x)h(y)$ is a continuous function in the rectangle $\mathcal{R}: [a,b] \times [c,d]$ and \[ \iint_{\mathcal{R}} f(x,y) \ dA = \int_a^bg(x) \ dx \int_c^d h(y) \ dy \]
+\end{theorem}
 
-\subsection{Triple Integrals} % not covered
+\subsection{Triple Integrals (not covered)} % not covered
+While double integrals are formed by considering small area elements in the $xy$-plane, a triple integral is formed by considering small volume elements in space. Suppose we have a box $\mathcal{B}: [a,b]\times [c,d] \times [r,s]$ in space, where $f(x,y,z)$ is defined in. We can use the same principles as in a double integral in order to create small subboxes $B_{ijk}$. Dividing $x$ into $l$ subintervals, $y$ into $m$ subintervals, and $z$ into $n$ subintervals, We omit the steps here, but it should be obvious that \[ V_{\text{box}} \approx \sum_{i=1}^l\sum_{j=1}^m\sum_{k=1}^nf(x_{ijk}^*,y_{ijk}^*,z_{ijk}^*)\Delta V_{ijk} \]
+Then the triple integral is defined as: \[ \iiint_{\mathcal{B}} f(x,y,z) \ dV = \lim_{l,m,n \to \infty}\sum_{i=1}^l\sum_{j=1}^m\sum_{k=1}^nf(x_{ijk}^*,y_{ijk}^*,z_{ijk}^*)\Delta V_{ijk} \]
+and calculating the integral is similar: \[ \iiint_{\mathcal{B}} f(x,y,z) \ dV = \int_r^s\int_c^d\int_a^bf(x,y,z) \ dx \ dy \ dz \]
+Fubini's Theorem and the Separation of Variables Theorem still apply. \\ \\
+When calculating over general solid regions, there are two types:
+\begin{enumerate}
+\item Type I solid regions, given by $\{(x,y,z)| (x,y) \in \mathcal{D}, u_1(x,y) \le z \le u_2(x,y) \}$ where $\mathcal{D}$ is the projection onto the $xy$ plane. In this case, our integral is \[ \iint_{\mathcal{D}}\left[\int_{u_1(x,y)}^{u_2(x,y)}f(x,y,z) \ dz\right] \ dA \]
+\item Type II solid regions, given by $\{(x,y,z)| a \le x \le b, g_1(x) \le y \le g_2(x), u_1(x,y) \le z \le u_2(x,y) \}$. In this case, our integral is \[ \int_a^b\int_{g_1(x)}^{g_2(x)}\int_{u_1(x,y)}^{u_2(x,y)}f(x,y,z) \ dz \ dy \ dx \]
+\end{enumerate}
 
 \subsection{Change of Variables}
+When making a change of variables within an integral, we wish to change the integral into one that is much simpler to integrate. In this case, what we are doing is changing the region we are integrating over in the $xy$-plane, and changing it into a rectangular region in some other plane, say the $uv$-plane. We do this by defining a transformation $T$.
 
 \section{Vector Calculus} % not covered
 
