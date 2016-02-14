@@ -828,10 +828,124 @@ Define the \textbf{Jacobian} to be:
 Then we have the following result:
 \begin{theorem}[Change of Variables Theorem]
 Suppose $\mathcal{R}$ is a closed, bounded region in the $xy$-plane and $\mathcal{S}$ is a closed, bounded region in the $uv$-plane so that $T(u,v) = (x,y) = (g(u,v),h(u,v))$ and $T$ is one-to-one. If $f$ is continuous on $\mathcal{R}$, $g,h$ have continuous first partial derivatives, and $\frac{\partial(x,y)}{\partial (u,v)} \neq 0$ on $\mathcal{S}$, then
-\[ \iint_{\mathcal{R}} f(x,y) \ dA = \iint_{\mathcal{R}}f(g(u,v),h(u,v))\left|\frac{\partial (x,y)}{\partial (u,v)}\right| \ du \ dv \]
+\[ \iint_{\mathcal{R}} f(x,y) \ dA = \iint_{\mathcal{R}}f(g(u,v),h(u,v))\left|\frac{\partial (x,y)}{\partial (u,v)}\right|  du \ dv \]
 \end{theorem}
 
-\section{Vector Calculus} % not covered
+We will prove this theorem for when the region $\mathcal{R}$ is a parallelogram (we can split the region into smaller regions that we can approximate to be parallelograms). It will turn out that it is true for general regions.
+\begin{proof}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis} [
+      axis lines=left,
+      ticks=none,
+      xlabel=$u$,ylabel=$v$,
+      xmin=0,ymin=0,xmax=7,ymax=7,
+      clip=false,
+    ]
+    \addplot[color=black, thick,mark color=black,mark=*] coordinates {(2,2)(5,2)(5,4)(2,4)(2,2)};
+    \addplot[fill=green,fill opacity=0.5] coordinates {(2,2)(5,2)(5,4)(2,4)(2,2)};
+    \node [below] at (axis cs:2,2) {$(u,v)$};
+    \node [right] at (axis cs:5,2) {$(u+\Delta u,v)$};
+    \node [right] at (axis cs:5,4) {$(u+\Delta u,v + \Delta v)$};
+    \node [above] at (axis cs:2,4) {$(u,v+\Delta v)$};
+    \node at (axis cs:3.5,3) {$\mathcal{S}$};
+  \end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.75]
+  \begin{axis} [
+      axis lines=left,
+      ticks=none,
+      xlabel=$x$,ylabel=$y$,
+      xmin=0,ymin=0,xmax=7,ymax=7,
+      clip=false,
+    ]
+    \addplot[color=black, thick,mark color=black,mark=*] coordinates {(2,1.5)(6,1.5)(5,4.5)(1,4.5)(2,1.5)};
+    \addplot[fill=red,fill opacity=0.5] coordinates {(2,1.5)(6,1.5)(5,4.5)(1,4.5)(2,1.5)};
+    \node [below] at (axis cs:2,1.5) {$M$};
+    \node [right] at (axis cs:6,1.5) {$N$};
+    \node [right] at (axis cs:5,4.5) {$P$};
+    \node [above] at (axis cs:1,4.5) {$Q$};
+    \node at (axis cs:3.5,3) {$\mathcal{R}$};
+  \end{axis}
+\end{tikzpicture}
+\end{figure}
+
+In the above figure, let $x = g(u,v)$ and $y=h(u,v)$. Then we have the following coordinates:
+\begin{itemize}
+\item $M(g(u,v),h(u,v))$
+\item $N(g(u+\Delta u,v),h(u+\Delta u,v))$
+\item $P(g(u+\Delta u,v+\Delta v),h(u+\Delta u,v+\Delta v))$
+\item $Q(g(u,v+\Delta v),h(u,v+\Delta v))$
+\end{itemize}
+The area of $\mathcal{S}$ is equal to $\Delta u\Delta v$. When $\Delta u, \Delta v$ are very small, \[ \text{Area of } \mathcal{R} \approx \norm{\overrightarrow{MN} \times \overrightarrow{MQ}} \]
+Writing the component form of these two vectors: 
+\[
+\begin{aligned}
+\overrightarrow{MN} &= [g(u+\Delta u,v) - g(u,v)]\ihat + [h(u+\Delta u,v) - h(u,v)]\jhat \\
+\overrightarrow{MQ} &= [g(u,v+\Delta v) - g(u,v)]\ihat + [h(u,v+\Delta v) - h(u,v)]\jhat \\
+\end{aligned}
+\]
+But also note that when $\Delta u,\Delta v$ are very small,
+\[
+\begin{aligned}
+g_u(u,v) \approx \frac{g(u+\Delta u,v) - g(u,v)}{\Delta u} &\qquad h_u(u,v) \approx \frac{h(u+\Delta u,v) - h(u,v)}{\Delta u} \\
+g_v(u,v) \approx \frac{g(u,v+\Delta v) - g(u,v)}{\Delta v} &\qquad h_v(u,v) \approx \frac{h(u,v+\Delta v) - h(u,v)}{\Delta v} \\
+\end{aligned}
+\]
+So,
+\[
+\begin{aligned}
+\overrightarrow{MN} &= \frac{\partial x}{\partial u}\Delta u \ihat + \frac{\partial y}{\partial u}\Delta v \jhat \\
+\overrightarrow{MQ} &= \frac{\partial x}{\partial v}\Delta u \ihat + \frac{\partial y}{\partial v}\Delta v \jhat \\
+\end{aligned}
+\]
+Therefore,
+\[
+\begin{aligned}
+\overrightarrow{MN} \times \overrightarrow{MQ} &=
+\begin{vmatrix}
+\ihat & \jhat & \khat \\
+\frac{\partial x}{\partial u}\Delta u & \frac{\partial y}{\partial u}\Delta u & 0 \\
+\frac{\partial x}{\partial v}\Delta v & \frac{\partial y}{\partial v}\Delta v & 0 
+\end{vmatrix}
+= 0\ihat - 0\jhat + 
+\begin{vmatrix}
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial u} \\
+\frac{\partial x}{\partial v} & \frac{\partial y}{\partial v} 
+\end{vmatrix}
+\Delta u\Delta v \khat \\
+\text{Area of } \mathcal{R} &= \Delta A \approx \norm{\overrightarrow{MN} \times \overrightarrow{MQ}} \approx \left|\frac{\partial (x,y)}{\partial(u,v)}\right|du \ dv
+\end{aligned}
+\]
+Therefore,\[ \iint_{\mathcal{R}} f(x,y) \ dA = \iint_{\mathcal{R}}f(g(u,v),h(u,v))\left|\frac{\partial (x,y)}{\partial (u,v)}\right| du \ dv \]
+\end{proof}
+
+This concept is best learned by example.\\ \\
+Suppose we wish to evaluate the integral \[ \iint_{\mathcal{R}} (x+y)^2\sin^2(x-y) \ dA \] where $\mathcal{R}$ is the region bounded by the square with vertices $(0,1),(1,2),(2,1),(1,0)$. We cannot really perform this integral, so we use a change of variables. We note that the region is bounded by
+\[
+\begin{aligned}
+1 &\le x+y \le 3 \\
+-1 &\le x-y \le 1
+\end{aligned}
+\]
+so we let $u = x+y$ and $v = x-y$. Solving for $x$ and $y$, we get $x = g(u,v) = \frac{u+v}{2}$ and $y = h(u,v) = \frac{u-v}{2}$. The Jacobian is:
+\[ \frac{\partial (x,y)}{\partial (u,v)} = \begin{vmatrix}
+\frac{\partial x}{\partial u} & \frac{\partial y}{\partial u} \\
+\frac{\partial x}{\partial v} & \frac{\partial y}{\partial v} 
+\end{vmatrix} = \begin{vmatrix}
+\frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & -\frac{1}{2}
+\end{vmatrix} = -\frac{1}{2} \]
+So our integral becomes  \[ \iint_{\mathcal{R}} (x+y)^2\sin^2(x-y) \ dA = \int_{-1}^1\int_1^3u^2\sin^2(v) \left|-\frac{1}{2}\right| du \ dv \]
+which can be computed normally (by separation of variables or by iterated integrals).
+\subsection{Integrals in Special Coordinate Systems}
+We omit the proofs here, but using the above technique, we can transform a Cartesian integral into the following systems:
+\begin{itemize}
+\item \textbf{Polar} \[ \begin{cases} x = r\cos{\theta} \\ y = r\sin{\theta} \end{cases} \] which means \[ \iint_{\mathcal{R}}f(x,y) \ dA = \iint_{\mathcal{S}}f(r\cos{\theta},r\sin{\theta}) r \ dr \ d\theta\]
+\item \textbf{Cylindrical} \[ \begin{cases} x = r\cos{\theta} \\ y = r\sin{\theta} \\ z = z \end{cases} \] which means \[ \iiint_{\mathcal{B}} f(x,y,z) \ dV = \iiint_{\mathcal{G}}f(r\cos{\theta},r\sin{\theta},z) r \ dr \ d\theta \ dz \]
+\item \textbf{Spherical} \[ \begin{cases} x = r\sin{\theta}\cos{\varphi} \\ y = r\sin{\theta}\sin{\varphi} \\ z = r\cos{\theta} \end{cases} \] which means \[ \iiint_{\mathcal{B}} f(x,y,z) \ dv = \iiint_{\mathcal{G}}f(r\sin{\theta}\cos{\varphi},r\sin{\theta}\sin{\varphi},r\cos{\theta}) r^2\sin{\theta} \ dr \ d\theta \ d\varphi \]
+\end{itemize}
+\section{Vector Calculus (not covered)} % not covered
 
 \subsection{Line Integrals}
 
