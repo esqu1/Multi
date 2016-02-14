@@ -822,9 +822,14 @@ Define the \textbf{Jacobian} to be:
 \[ \frac{\partial (x_1,x_2,\dots,x_n)}{\partial (u_1,u_2,\dots,u_n)} = \begin{vmatrix}
 \frac{\partial x_1}{\partial u_1} & \frac{\partial x_1}{\partial u_2} & \cdots & \frac{\partial x_1}{\partial u_n} \\
 \frac{\partial x_2}{\partial u_1} & \frac{\partial x_2}{\partial u_2} & \cdots & \frac{\partial x_2}{\partial u_n} \\
-\vdots & \vdots & \ddots & \vddots \\
+\vdots & \vdots & \ddots & \vdots \\
 \frac{\partial x_n}{\partial u_1} & \frac{\partial x_n}{\partial u_2} & \cdots & \frac{\partial x_n}{\partial u_n}
 \end{vmatrix}\]
+Then we have the following result:
+\begin{theorem}[Change of Variables Theorem]
+Suppose $\mathcal{R}$ is a closed, bounded region in the $xy$-plane and $\mathcal{S}$ is a closed, bounded region in the $uv$-plane so that $T(u,v) = (x,y) = (g(u,v),h(u,v))$ and $T$ is one-to-one. If $f$ is continuous on $\mathcal{R}$, $g,h$ have continuous first partial derivatives, and $\frac{\partial(x,y)}{\partial (u,v)} \neq 0$ on $\mathcal{S}$, then
+\[ \iint_{\mathcal{R}} f(x,y) \ dA = \iint_{\mathcal{R}}f(g(u,v),h(u,v))\left|\frac{\partial (x,y)}{\partial (u,v)}\right| \ du \ dv \]
+\end{theorem}
 
 \section{Vector Calculus} % not covered
 
