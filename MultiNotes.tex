@@ -951,8 +951,63 @@ We omit the proofs here, but using the above technique, we can transform a Carte
 Line integrals deal with integrals over curves in the plane or space, in which the curve takes on certain values over a region. 
 
 There are many forms of the line integral. First, we explore taking the line integral with respect to arc length. By partitioning a curve $\mathcal{C}$ into $n$ subintervals, we can find the value taken on by each of those subintervals with $f(x,y)$. We define the \textbf{line integral with respect to arc length} as: \[ \int_{\mathcal{C}}f(x,y) ds = \lim_{n \to \infty}\sum_{i=1}^nf(x_i^*,y_i^*)\Delta s_i \]
+Recall from single-variable calculus that the arc length along a parametric curve $\mathcal{C}(t) = \la x(t), y(t) \ra$ is: \[ s(t) = \int_a^t\sqrt{\left(\frac{dx}{d\tau}\right)^2 + \left(\frac{dy}{d\tau}\right)^2} \ d\tau \]
+Therefore, \[ ds = \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} \ dt \]
+So another form for our line integral is:
+\[ \boxed{\int_{\mathcal{C}}f(x,y) \ ds = \int_a^b f(x(t),y(t)) \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} \ dt} \]
+One way to intuitively think about the line integral is as follows: if a wire follows the curve $\mathcal{C}$, and $f(x,y)$ represents the linear mass density of the wire at $(x,y)$, then the line integral will give the mass of the wire on the curve. \\ \\
+We can also define line integrals with respect to $x$ and $y$ as follows:
+\[
+\begin{aligned}
+\int_{\mathcal{C}}f(x,y) \ dx &= \int_a^b f(x(t),y(t))\frac{dx}{dt} \ dt \\
+\int_{\mathcal{C}}f(x,y) \ dy &= \int_a^b f(x(t),y(t))\frac{dy}{dt} \ dt
+\end{aligned}
+\]
 
-\subsection{Conservative Vector Fields}
+Since we usually have these two integrals appearing together, a shorthand for the sum of these two integrals is:
+\[ \int_{\mathcal{C}}P(x,y) \ dx + Q(x,y) \ dy = \int_{\mathcal{C}}P(x,y) dx + \int_{\mathcal{C}} Q(x,y) dy \]
+
+We can extend this to three dimensions easily.
+
+\subsection{Work}
+One of the ubiquitous applications of line integrals is the concept of work. If we have a vector field $\vec{F}(x,y)$ representing the force field at a position $(x,y)$, then it turns out the work done by the field on a particle moving along a curve $\mathcal{C}$ is \[ \int_{\mathcal{C}}\vec{F}(x,y) \cdot d\vec{r} \]
+Do note that this expression merely simplifies down to our sum from above, if the curve can be described by $\vec{r}(t) = \la x(t),y(t),z(t) \ra$: \[ \int_{\mathcal{C}}\vec{F}(x,y) \cdot d\vec{r} = \int_{\mathcal{C}}F_x \ dx + F_y \ dy + F_z \ dz \]
+
+\subsection{The Fundamental Theorem of Line Integrals}
+Earlier on, we explored the concept of the gradient of a function. We can actually treat the gradient as the derivative of a function of multiple variables. This gives rise to the following theorem.
+\begin{theorem}[Fundamental Theorem of Line Integrals]
+Let $\mathcal{C}$ be a smooth curve given by $\vec{r}(t)$ defined from $a \le t \le b$. Let $f$ be a differentiable multivariate function with a continuous gradient vector $\grad{f}$ on $\mathcal{C}$. Then, \[ \int_{\mathcal{C}} \grad{f} \cdot d\vec{r} = f(\vec{r}(b)) - f(\vec{r}(a)) \]
+\end{theorem}
+
+\begin{proof}
+\[
+\begin{aligned}
+\int_{\mathcal{C}} \grad{f} \cdot d\vec{r} &= \int_{\mathcal{C}} \frac{\partial f}{\partial x} dx + \frac{\partial f}{\partial y} dy \\
+&= \int_a^b \left[\frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt}\right] dt \\
+&= \int_a^b \frac{d}{dt}(f(x(t),y(t))) \ dt \\
+&= f(x(b),y(b)) - f(x(a),y(a)) = f(\vec{r}(b)) - f(\vec{r}(a))
+\end{aligned}
+\]
+\end{proof}
+
+One thing to see about this theorem is that as long as we can find the ``antiderivative'' of $\grad{f}$, then it does not matter what the precise curve $\mathcal{C}$ is; any two curves with the same endpoints will give the same value of the line integral. Such a vector field $\vec{F} = \grad{f}$ is called \textbf{conservative} if it exhibits path independence. If $\vec{F}$ is the gradient of some function, then it is conservative. 
+
+The following theorem gives a nice way to see if a vector field is conservative.
+\begin{theorem}
+Let $\vec{F}(x,y) = P(x,y)\ihat + Q(x,y)\jhat$ be a vector on an open simply-connected region $\mathcal{D}$; namely, a region without holes or breaks. Then \[ \frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x} \] for all $(x,y) \in \mathcal{D}$, if and only if $\vec{F}$ is conservative,i.e. $\vec{F}$ is the gradient of some function.
+\end{theorem}
+
+\begin{proof}
+We prove the forward direction only. By hypothesis $\vec{F}$ is the gradient of some function $\phi(x,y)$, namely, \[ \vec{F} = P\ihat + Q\jhat = \grad{\phi} = \frac{\partial \phi}{\partial x}\ihat + \frac{\partial \phi}{\partial y} \jhat\]  
+Then, 
+\[
+\begin{aligned}
+\frac{\partial P}{\partial y} &= \frac{\partial^2 \phi}{\partial y \ \partial x} \\
+\frac{\partial Q}{\partial x} &= \frac{\partial^2 \phi}{\partial x \ \partial y} 
+\end{aligned}
+\]
+By Clairaut's Theorem, $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$, and the proof is complete.
+\end{proof}
 
 \subsection{Green's Theorem}
 
