@@ -816,7 +816,15 @@ When calculating over general solid regions, there are two types:
 \end{enumerate}
 
 \subsection{Change of Variables}
-When making a change of variables within an integral, we wish to change the integral into one that is much simpler to integrate. In this case, what we are doing is changing the region we are integrating over in the $xy$-plane, and changing it into a rectangular region in some other plane, say the $uv$-plane. We do this by defining a transformation $T$.
+When making a change of variables within an integral, we wish to change the integral into one that is much simpler to integrate. In this case, what we are doing is changing the region we are integrating over in the $xy$-plane, and changing it into a rectangular region in some other plane, say the $uv$-plane. We do this by defining a transformation $T:(u,v) \to (x,y)$ that will allows us to transform our region into something better to work with. 
+
+Define the \textbf{Jacobian} to be:
+\[ \frac{\partial (x_1,x_2,\dots,x_n)}{\partial (u_1,u_2,\dots,u_n)} = \begin{vmatrix}
+\frac{\partial x_1}{\partial u_1} & \frac{\partial x_1}{\partial u_2} & \cdots & \frac{\partial x_1}{\partial u_n} \\
+\frac{\partial x_2}{\partial u_1} & \frac{\partial x_2}{\partial u_2} & \cdots & \frac{\partial x_2}{\partial u_n} \\
+\vdots & \vdots & \ddots & \vddots \\
+\frac{\partial x_n}{\partial u_1} & \frac{\partial x_n}{\partial u_2} & \cdots & \frac{\partial x_n}{\partial u_n}
+\end{vmatrix}\]
 
 \section{Vector Calculus} % not covered
 
