@@ -1129,23 +1129,7 @@ Therefore,
 \subsection{Green's Theorem for General Regions}
 If we can divide a region up into multiple simple regions, we can apply Green's Theorem to those simple regions and add the values up to obtain a cumulative value. \\ \\
 We can also apply it to when a region has a hole.
-\begin{center}
-\begin{tikzpicture}[scale=0.9]
-  \begin{axis}[
-      axis lines=left,clip=false,ticks=none,
-      xlabel=$x$,ylabel=$y$,
-      xmin=0,ymin=0,xmax=10,ymax=10,
-    ]
-        \addplot[color=white,smooth,fill=green,fill opacity=0.5] coordinates {(4,2)(5,2.3)(7,3)(6,5)(5.5,5.5)(4,4.5)(2.5,3)(3,2.1)(4,2)};
-        \addplot[blue,smooth]
-        coordinates {(4,2)(5,2.3)(7,3)(6,5)(5.5,5.5)(4,4.5)(2.5,3)(3,2.1)(4,2)}
-        [arrow inside={end=stealth,opt={blue,scale=1.5}}{0.25,0.8}];
-        \addplot[color=white,smooth,fill=white] coordinates {(5.3,3.7)(4.3,4)(5.3,4.3)(6.3,4)(5.3,3.7)};
-        \addplot[blue,smooth] coordinates {(5.3,3.7)(4.3,4)(5.3,4.3)(6.3,4)(5.3,3.7)}
-                [arrow inside={end=stealth,opt={blue,scale=1.5}}{0.15}];
-  \end{axis}
-\end{tikzpicture}
-\end{center}
+\includegraphics[scale=0.4]{holes}
 \subsection{Surface Integrals}
 
 \subsection{Divergence Theorem}
