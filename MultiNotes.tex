@@ -1,5 +1,24 @@
 \documentclass[12pt]{article}
 \usepackage{esqu1}
+\usetikzlibrary{decorations.markings}
+\tikzset{
+    set arrow inside/.code={\pgfqkeys{/tikz/arrow inside}{#1}},
+    set arrow inside={end/.initial=>, opt/.initial=},
+    /pgf/decoration/Mark/.style={
+        mark/.expanded=at position #1 with
+        {
+            \noexpand\arrow[\pgfkeysvalueof{/tikz/arrow inside/opt}]{\pgfkeysvalueof{/tikz/arrow inside/end}}
+        }
+    },
+    arrow inside/.style 2 args={
+        set arrow inside={#1},
+        postaction={
+            decorate,decoration={
+                markings,Mark/.list={#2}
+            }
+        }
+    },
+}
 \pagestyle{fancy}
 
 \lhead{Brandon Lin}
@@ -969,6 +988,10 @@ Since we usually have these two integrals appearing together, a shorthand for th
 
 We can extend this to three dimensions easily.
 
+Sometimes, our curve $\mathcal{C}$ may consist of multiple individual curves. In this case, the line integrals are additive, meaning we can take the integrals of each individual curve and add them. 
+
+What happens when we take the line integral in the opposite direction? You will see that \[ \int_{-\mathcal{C}} f(x,y) \ dx + g(x,y) \ dy = -\int_{\mathcal{C}} f(x,y) \ dx + g(x,y) \ dy\] where $-\mathcal{C}$ is the curve $\mathcal{C}$ traveling in the opposite direction. 
+
 \subsection{Work}
 One of the ubiquitous applications of line integrals is the concept of work. If we have a vector field $\vec{F}(x,y)$ representing the force field at a position $(x,y)$, then it turns out the work done by the field on a particle moving along a curve $\mathcal{C}$ is \[ \int_{\mathcal{C}}\vec{F}(x,y) \cdot d\vec{r} \]
 Do note that this expression merely simplifies down to our sum from above, if the curve can be described by $\vec{r}(t) = \la x(t),y(t),z(t) \ra$: \[ \int_{\mathcal{C}}\vec{F}(x,y) \cdot d\vec{r} = \int_{\mathcal{C}}F_x \ dx + F_y \ dy + F_z \ dz \]
@@ -1015,12 +1038,114 @@ Green's Theorem relates a line integral of a simple, closed curve to a double in
 Before we state it, we define the term \textbf{positively oriented} to refer to a curve where the direction of travel for increasing $t$ is counterclockwise. 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.5]{curves}
+  \includegraphics[scale=0.4]{curves}
+  \caption{Left: Positively oriented curve. Right: Negatively oriented curve.}
 \end{figure}
 \begin{theorem}[Green's Theorem]
-
+Let $\mathcal{C}$ be a positively oriented, piecewise-smooth, closed curve in the plane. Let $\mathcal{D}$ be the region bounded by $\mathcal{C}$ ($\mathcal{C}$ is denoted $\partial \mathcal{D}$). If $P(x,y)$ and $Q(x,y)$ have continuous partial derivatives on an open region containing $\mathcal{D}$, then \[ \oint_{\mathcal{C}}P \ dx + Q \ dy = \iint_{\mathcal{D}}\left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right) \ dA \]
 \end{theorem}
+The loop around the integral sign means that $\mathcal{C}$ is a closed curve. 
+\begin{proof}
+This proof is for when $\mathcal{D}$ is both a type I and type II region. \\
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  \begin{axis}[
+      axis lines=left,clip=false,ticks=none,
+      xlabel=$x$,ylabel=$y$,
+      xmin=0,ymin=0,xmax=10,ymax=10,
+    ]
+        \addplot[color=white,smooth,fill=green,fill opacity=0.5] coordinates {(4,2)(5,2.3)(7,3)(6,5)(5.5,5.5)(4,4.5)(2.5,3)(3,2.1)(4,2)};
+        \addplot[blue,smooth]
+        coordinates {(4,2)(5,2.3)(7,3)(6,5)(5.5,5.5)(4,4.5)(2.5,3)(3,2.1)(4,2)}
+        [arrow inside={end=stealth,opt={blue,scale=1.5}}{0.25,0.8}];
+        \draw[dashed] (axis cs:2.46,2.95) -- (axis cs:2.46,0);
+        \draw[dashed] (axis cs:7,3) -- (axis cs:7,0);
+        \draw [fill=black] (axis cs:2.46,2.93) circle (1pt);
+        \draw [fill=black] (axis cs:7,3) circle (1pt);        
+        \node[below] at (axis cs:2.46,0) {$a$};
+        \node[below] at (axis cs:7,0) {$b$};
+        \node[below] at (axis cs:4,2) {$\mathcal{C}_1: g_1(x)$};
+        \node[above] at (axis cs:5.5,5.5) {$\mathcal{C}_2: g_2(x)$};
+        \node at (axis cs:4.8,3.7) {$\mathcal{D}$};
+  \end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.9]
+  \begin{axis}[
+      axis lines=left,clip=false,ticks=none,
+      xlabel=$x$,ylabel=$y$,
+      xmin=0,ymin=0,xmax=10,ymax=10,
+    ]
+    \addplot[color=white,smooth,fill=green,fill opacity=0.5] coordinates {(4,2)(5,2.3)(7,3)(6,5)(5.5,5.5)(4,4.5)(2.5,3)(3,2.1)(4,2)};
+        \addplot[blue,smooth]
+        coordinates {(4,2)(5,2.3)(7,3)(6,5)(5.5,5.5)(4,4.5)(2.5,3)(3,2.1)(4,2)}
+        [arrow inside={end=stealth,opt={blue,scale=1.5}}{0.25,0.8}];
+        \draw[dashed] (axis cs:5.5,5.5) -- (axis cs:0,5.5);
+        \draw[dashed] (axis cs:3.2,2) -- (axis cs:0,2);
+        \draw [fill=black] (axis cs:5.5,5.5) circle (1pt);
+        \draw [fill=black] (axis cs:3.2,2) circle (1pt);        
+        \node[left] at (axis cs:0,5.5) {$c$};
+        \node[left] at (axis cs:0,2) {$d$};
+        \node[left] at (axis cs:3,4) {$\mathcal{C}_3:h_1(y)$};
+        \node[right] at (axis cs:7,3) {$\mathcal{C}_4:h_2(y)$};
+        \node at (axis cs:4.8,3.7) {$\mathcal{D}$};
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+We wish to prove the following:
+\[ \int_{\mathcal{C}}P(x,y) \ dx = - \iint_{\mathcal{D}} \frac{\partial P}{\partial y} \ dA \qquad \text{and} \qquad \int_{\mathcal{C}}Q(x,y) \ dx = \iint_{\mathcal{D}}\frac{\partial Q}{\partial x} \ dA \]
+To prove the first condition, treat $\mathcal{D}$ as type I. Then, since $\mathcal{C} = \mathcal{C}_1 \cup \mathcal{C}_2$, \[ \int_{\mathcal{C}}P(x,y) \ dx = \int_{\mathcal{C}_1}P(x,y) \ dx + \int_{\mathcal{C}_2}P(x,y) \ dx \]
+To simplify our calculations, we write \[ \oint_{\mathcal{C}}P(x,y) \ dx = \int_{\mathcal{C}_1}P(x,y) \ dx - \int_{-\mathcal{C}_2}P(x,y) \ dx \]
+since now we can describe our curves $\mathcal{C}_1$ and $\mathcal{C}_2$ as:
+\[
+\begin{aligned}
+C_1&: x = t, y = g_1(t) \qquad (a \le t \le b) \\
+-C_2&: x = t, y = g_2(t) \qquad (a \le t \le b) \\
+\end{aligned}
+\]
+Then,
+\[
+\begin{aligned}
+\int_{\mathcal{C}}P(x,y) \ dx &= \int_a^bPf(t,g_1(t)) \left(\frac{dx}{dt}\right) \ dt - \int_a^b P(t,g_2(t))\left(\frac{dx}{dt}\right) \ dt \\
+&= \int_a^b P(t,g_1(t)) \ dt - \int_a^b P(t,g_2(t)) \ dt \\
+&= -\int_a^b P(t,y)\biggl|_{y=g_1(t)}^{y=g_2(t)} \ dt \\
+&= -\int_a^b \int_{g_1(t)}^{g_2(t)}\frac{\partial P}{\partial y} \ dy \ dt = -\int_a^b \int_{g_1(x)}^{g_2(x)}\frac{\partial P}{\partial y} \ dy \ dt \\
+&= -\iint_{\mathcal{D}}\frac{\partial P}{\partial y} \ dA
+\end{aligned}
+\]
+Using a similar argument by treating $\mathcal{D}$ as a type II region, we ultimately get \[ \int_{\mathcal{C}}Q(x,y) \ dy = \iint_{\mathcal{D}}\frac{\partial Q}{\partial x} \ dA \]
+Adding these two gives the statement of the theorem, and we're done. 
+\end{proof}
 
+We can use Green's Theorem to find the area enclosed by a closed curve. Since the area of a region is given by \[ \iint_{\mathcal{D}}dA \] we need \[ \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} = 1 \]
+We can choose different things for $P$ and $Q$:
+\begin{itemize}
+\item $P(x,y) = -y$, $Q(x,y) = 0$ 
+\item $P(x,y) = 0$, $Q(x,y) = x$
+\item $P(x,y) = -\frac{1}{2}y$, $Q(x,y) = \frac{1}{2}x$
+\end{itemize}
+Therefore,
+\[ \boxed{A = -\oint_{\mathcal{C}}y \ dx = \oint_{\mathcal{C}}x \ dy = \frac{1}{2}\oint_{\mathcal{C}}-y \ dx + x \ dy} \]
+
+\subsection{Green's Theorem for General Regions}
+If we can divide a region up into multiple simple regions, we can apply Green's Theorem to those simple regions and add the values up to obtain a cumulative value. \\ \\
+We can also apply it to when a region has a hole.
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  \begin{axis}[
+      axis lines=left,clip=false,ticks=none,
+      xlabel=$x$,ylabel=$y$,
+      xmin=0,ymin=0,xmax=10,ymax=10,
+    ]
+        \addplot[color=white,smooth,fill=green,fill opacity=0.5] coordinates {(4,2)(5,2.3)(7,3)(6,5)(5.5,5.5)(4,4.5)(2.5,3)(3,2.1)(4,2)};
+        \addplot[blue,smooth]
+        coordinates {(4,2)(5,2.3)(7,3)(6,5)(5.5,5.5)(4,4.5)(2.5,3)(3,2.1)(4,2)}
+        [arrow inside={end=stealth,opt={blue,scale=1.5}}{0.25,0.8}];
+        \addplot[color=white,smooth,fill=white] coordinates {(5.3,3.7)(4.3,4)(5.3,4.3)(6.3,4)(5.3,3.7)};
+        \addplot[blue,smooth] coordinates {(5.3,3.7)(4.3,4)(5.3,4.3)(6.3,4)(5.3,3.7)}
+                [arrow inside={end=stealth,opt={blue,scale=1.5}}{0.15}];
+  \end{axis}
+\end{tikzpicture}
+\end{center}
 \subsection{Surface Integrals}
 
 \subsection{Divergence Theorem}
