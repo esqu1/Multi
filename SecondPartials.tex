@@ -1,0 +1,146 @@
+\documentclass[12pt]{article}
+\usepackage{esqu1}
+\usetikzlibrary{decorations.markings}
+\tikzset{
+    set arrow inside/.code={\pgfqkeys{/tikz/arrow inside}{#1}},
+    set arrow inside={end/.initial=>, opt/.initial=},
+    /pgf/decoration/Mark/.style={
+        mark/.expanded=at position #1 with
+        {
+            \noexpand\arrow[\pgfkeysvalueof{/tikz/arrow inside/opt}]{\pgfkeysvalueof{/tikz/arrow inside/end}}
+        }
+    },
+    arrow inside/.style 2 args={
+        set arrow inside={#1},
+        postaction={
+            decorate,decoration={
+                markings,Mark/.list={#2}
+            }
+        }
+    },
+}
+\pagestyle{fancy}
+
+\lhead{Brandon Lin}
+\chead{Multivariate Calculus}
+\rhead{Fall 2015}
+
+
+\begin{document}
+
+\title{Proof of the Second Partials Test}
+\author{Brandon Lin\\Stuyvesant High School\\Fall 2015\\Teacher: Ms. Avigdor}
+\maketitle
+\newpage
+
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Recall the statement of the Second Partials Test.
+\begin{theorem}[Second Partials Test]
+Let $z = f(x,y)$ be a function of two variables with continuous first and second partial derivatives in some disk containing $(a,b)$, where $f_x(a,b) = f_y(a,b) = 0$. Let the \textbf{discriminant} of $f$ be $D = f_{xx}(a,b)f_{yy}(a,b) - [f_{xy}(a,b)]^2$. Then:
+\begin{itemize}
+\item If $D > 0$ and $f_{xx}(a,b) < 0$, $f$ has a relative maximum at $(a,b)$.
+\item If $D > 0$ and $f_{xx}(a,b) > 0$, $f$ has a relative minimum at $(a,b)$.
+\item If $D < 0$, $f$ has a \textbf{saddle point} at $(a,b)$.
+\item If $D = 0$, the test is inconclusive.
+\end{itemize}
+\end{theorem}
+The proof of this theorem will rely on \textbf{quadratic forms}.
+
+\section{Quadratic Forms}
+A quadratic form is a function in 2 variables of the type \[ Q(h,k) = ah^2 + 2bhx + ck^2, \qquad a,b,c \in \mathbb{R} \] In our proof, we want to analyze the sign of the quadratic form. depending on the values that $h,k$ take on. 
+
+There is an easy way to find the sign of a quadratic form; by using the discriminant.
+
+\begin{lemma}
+\label{quad}
+Let $Q(h,k) = Ah^2 + 2Bhk + Ck^2$ be a quadratic form with discriminant $D = AC - B^2$. Then:
+\begin{enumerate}
+\item If $D > 0$ and $A > 0$, then $Q(h,k) > 0$ for $(h,k) \neq (0,0)$
+\item If $D > 0$ and $A < 0$, then $Q(h,k) < 0$ for $(h,k) \neq (0,0)$
+\item If $D < 0$ then $Q(h,k)$ takes on both positive and negative values.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Assume $A \neq 0$. Then 
+\[
+\begin{aligned}
+Q(h,k) &= Ah^2 + 2Bhk + Ck^2 \\
+&= A\left(h^2 + 2\frac{B}{A}hk + \frac{C}{A}k^2\right) \\
+&= A\left(h^2 + 2\frac{B}{A}hk + \frac{B^2}{A^2}k^2 + \frac{C}{A}k^2 - \frac{B^2}{A^2}k^2\right) \\
+&= A\left(h + \frac{B}{A}k\right)^2 + \left(C - \frac{B^2}{A}\right)k^2 \\
+&= A\left(h + \frac{B}{A}k\right)^2 + \frac{D}{A}k^2 
+\end{aligned}
+\]
+\begin{itemize}
+\item If $D>0$ and $A>0$, then $\frac{D}{A} > 0$ and both terms above are positive; thus $Q(h,k) \ge 0$. If $Q(h,k) = 0$ then $k=0$ and $Ah^2 = 0 \to h=0$. Thus $Q(h,k) > 0$ when $(h,k) \neq (0,0)$.
+\item If $D>0$ and $A<0$, then $\frac{D}{A} < 0$ and both terms above are negative; thus (like above) $Q(h,k) < 0$ when $(h,k) \neq (0,0)$.
+\item If $D<0$:
+\begin{itemize}
+\item If $A \neq 0$, the terms above will have opposite signs, so $Q(h,k)$ takes on positive and negative values.
+\item If $A = 0$, then $Q(h,k) = 2Bhk + Ck^2$; same as above.
+\end{itemize}
+\end{itemize}
+\end{proof}
+
+\section{Taylor Polynomials}
+Next, we recall something we learned from BC Calculus. \\ \\
+A \textbf{Taylor Polynomial} centered at $a$ is a polynomial of the form \[ T(x) = f(a) + \frac{f'(a)}{1!}(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \frac{f'''(a)}{3!}(x-a)^3 + \cdots \]
+Remember that this polynomial gave us an approximation of a function at $x=a$.
+
+\begin{theorem}[Taylor's Theorem]
+If $f$ and its first $n$ derivatives $f',f'',\dots,f^{(n)}$ are continuous on $[a,b]$ and $f^{(n)}$ is differentiable on $(a,b)$, then there exists a number $c \in (a,b)$ such that \[ f(b) = f(a) + f'(a)(b-a) + \frac{f''(a)}{2!}(b-a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(b-a)^n + \frac{f^{(n+1)}(c)}{(n+1)!}(b-a)^{n+1} \]
+\end{theorem}
+
+\section{The Proof}
+\begin{proof}
+By hypothesis, $f$ has continuous first and second partial derivatives in some region $\mathcal{R}$ about $(a,b)$. Let the point $(a+h,b+k)$ be close enough to $(a,b)$ such that $(a+h,b+k) \in \mathcal{R}$ and the segment joining them also is in $\mathcal{R}$.
+
+Note that $\overline{PS}$ can be expressed parametrically as: \[ \begin{cases}x = a+ht \\ y=b+kt \end{cases} \qquad \text{where } 0 \le t \le 1 \]
+Let us investigate $f(x,y)$ over this line segment. Let $F(t) = f(a+ht,b+kt)$. Then, 
+\[
+\begin{aligned}
+F'(t) &= f_x(a+ht,b+kt)h + f_y(a+ht,b+kt)k \\
+F''(t) &= (f_{xx}(a+ht,b+kt)h + f_{xy}(a+ht,b+kt)k)h \\ &\ + (f_{yx}(a+ht,b+kt)h + f_{yy}(a+ht,b+kt)k)k
+\end{aligned}
+\]
+so $F$ and $F'$ are continuous on $[0,1]$ and $F'$ is differentiable on $(0,1)$. Then, by Taylor's Theorem, $\exists c \in (0,1)$ such that 
+\[ 
+\begin{aligned}
+F(1) &= F(0) + F'(0)(1-0) + \frac{F''(c)}{2!}(1-0)^2 \\
+&= F(0) + F'(0) + \frac{F''(0)}{2} \\
+F(1) - F(0) - F'(0) &= \frac{F''(c)}{2}
+\end{aligned}
+\]
+Now, express $F$ and its derivatives in terms of $f$:
+\[
+\begin{aligned}
+F(1) &= f(a+h,b+k) \\
+F(0) &= f(a,b) \\
+F'(0) &= f_x(a,b)h + f_y(a,b)k \\
+F''(c) &= h^2f_{xx}(a+hc,b+kc) + 2hkf_{xy}(a+hc,b+kc) + k^2f_{yy}(a+hc,b+kc) 
+\end{aligned}
+\]
+Substituting:
+\[ f(a+h,b+k) - f(a,b) - f_x(a,b)h - f_y(a,b)k = \frac{F''(c)}{2}\]
+From the hypothesis of the theorem, $f_x(a,b) = f_y(a,b) = 0$, so \[ f(a+h,b+k) - f(a,b) = \frac{1}{2}(h^2f_{xx}(a+hc,b+kc) + 2hkf_{xy}(a+hc,b+kc) + k^2f_{yy}(a+hc,b+kc))  \] Notice that the sign of $f(a+h,b+k) - f(a,b)$ will enable us to determine if $(a,b)$ harbors a maxima or minima. \\ \\
+Define \[ Q(t) = h^2f_{xx}(a+ht,b+kt) + 2hkf_{xy}(a+ht,b+kt) + k^2f_{yy}(a+ht,b+kt) \] By this definition, $Q(c) = f(a+h,b+k) - f(a,b)$; we want to analyze the sign of Q(c). Also define $S(t) = 2Q(t)$; $S$ and $Q$ will have the same sign.
+
+Since the second partials are continuous through $\mathcal{R}$, for sufficiently small $h,k$, their values at $(a+ch,b+ck)$ are nearly the same as the partials at $(a,b)$. Therefore, the sign of $Q(c)$ will be nearly the same as $Q(0) = Q(h,k)$.
+\[ S(0) = 2Q(0) = 2Q(h,k) = h^2f_{xx}(a,b) + 2hkf_{xy}(a,b) + k^2f_{yy}(a,b) \]
+Notice that this is a quadratic form, with 
+\[
+\begin{aligned}
+A &= f_{xx}(a,b) \\
+B &= f_{xy}(a,b) \\
+C &= f_{yy}(a,b) \\
+D &= AC - B^2 = f_{xx}(a,b)f_{yy}(a,b) - [f_{xy}(a,b)]^2
+\end{aligned}
+\]
+
+And the proof follows from Lemma \ref{quad}.
+\end{proof}
+\end{document}
